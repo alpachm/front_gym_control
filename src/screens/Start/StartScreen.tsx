@@ -8,8 +8,10 @@ import {
   Inter_400Regular,
   Inter_800ExtraBold,
 } from "@expo-google-fonts/inter";
+import { useTranslation } from "react-i18next";
 
 const StartScreen = () => {
+  const {t} = useTranslation();
   const [loadedFonts] = useFonts({
     Inter_100Thin,
     Inter_400Regular,
@@ -31,7 +33,7 @@ const StartScreen = () => {
 
   return (
     <View onLayout={onLayout}>
-      <Text style={global_styles.title}>StartScreen</Text>
+      <Text style={global_styles.title}>{t("Start_Screen:Title")}</Text>
     </View>
   );
 };
