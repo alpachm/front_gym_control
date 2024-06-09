@@ -26,8 +26,6 @@ export const ThemeContextProvider = (props: ThemeProviderProps) => {
     colorScheme === 'light' ? light_theme : dark_theme
   );
 
-  console.log({colorScheme: colorScheme})
-
   useEffect(() => {
     setTheme(colorScheme === 'light' ? light_theme : dark_theme);
   }, [colorScheme]);
