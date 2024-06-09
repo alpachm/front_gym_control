@@ -1,44 +1,110 @@
-import { useFonts } from "expo-font";
-import React, { useCallback, useEffect } from "react";
-import { Text, View } from "react-native";
-import * as SplashScreen from "expo-splash-screen";
-import {
-  Inter_100Thin,
-  Inter_400Regular,
-  Inter_800ExtraBold,
-  Inter_900Black
-} from "@expo-google-fonts/inter";
-import { useTranslation } from "react-i18next";
-import useGlobalStyles from "../../styles/useGlobalStyles";
+import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
+import useGlobalStyles from '../../styles/useGlobalStyles';
+import PrincipalLayout from '../../PrincipalLayout';
+import IconDumbbell from '../../icons/IconDumbbell';
+import { ThemeContext } from '../../context/themeContext';
+import { useContext } from 'react';
+import Button from '../../components/shared/Button';
+import IconButtonRightArrow from '../../icons/IconButtonRightArrow';
+import openUrl from '../../utils/openUrl';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { RootStackParams } from '../../navigation/StackNavigator';
 
 const StartScreen = () => {
-  const {t} = useTranslation();
-  const globalStyle = useGlobalStyles();
-  const [loadedFonts] = useFonts({
-    Inter_100Thin,
-    Inter_400Regular,
-    Inter_800ExtraBold,
-    Inter_900Black
-  });
-
-  useEffect(() => {
-    const prepare = async () => {
-      await SplashScreen.preventAutoHideAsync();
-    };
-    prepare();
-  }, []);
-
-  const onLayout = useCallback(async () => {
-    await SplashScreen.hideAsync();
-  }, [loadedFonts]);
-
-  if (!loadedFonts) return null;
+  const { theme } = useContext(ThemeContext);
+  const navigation = useNavigation<NavigationProp<RootStackParams>>();
+  const { t } = useTranslation();
+  const globalStyles = useGlobalStyles();
 
   return (
-    <View onLayout={onLayout}>
-      <Text style={globalStyle.title}>{t("Start_Screen:Title")}</Text>
-    </View>
+    <PrincipalLayout status="Start">
+      <View style={styles.container}>
+        <View style={styles.top_view}>
+          <IconDumbbell width={44} height={44} fill={theme.white} />
+          <Text
+            style={{
+              ...globalStyles.caption,
+              ...styles.caption_1,
+            }}
+          >
+            {t('Start_Screen:Caption_1')}
+          </Text>
+          <Text style={globalStyles.title}>{t('Start_Screen:Title')}</Text>
+          <Text
+            style={{
+              ...globalStyles.caption,
+              ...styles.caption_2,
+            }}
+          >
+            {t('Start_Screen:Caption_2')}
+          </Text>
+        </View>
+        <View style={styles.bottom_view}>
+          <Button
+            label={t('Start_Screen:Login')}
+            onPres={() => navigation.navigate("Login")}
+            icon={IconButtonRightArrow}
+            height={76}
+          />
+          <Pressable onPress={() => navigation.navigate("Register")}>
+            <Text
+              style={{
+                ...styles.register,
+                color: theme.white,
+              }}
+            >
+              {t('Start_Screen:Register')}
+            </Text>
+          </Pressable>
+          <Pressable
+            onPress={() =>
+              openUrl('https://alex-pacheco-portafolio.netlify.app/')
+            }
+          >
+            <Text
+              style={{
+                ...styles.footer_text,
+                color: theme.white,
+              }}
+            >
+              Develop by Alex
+            </Text>
+          </Pressable>
+        </View>
+      </View>
+    </PrincipalLayout>
   );
 };
 
 export default StartScreen;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'space-between',
+  },
+  top_view: {
+    gap: 15,
+  },
+  bottom_view: {},
+  caption_1: {
+    textTransform: 'uppercase',
+  },
+  caption_2: {
+    fontSize: 20,
+    letterSpacing: 2,
+  },
+  register: {
+    fontFamily: 'Inter_400Regular',
+    textAlign: 'center',
+    marginTop: 25,
+  },
+  footer_text: {
+    fontFamily: 'Inter_100Thin',
+    fontSize: 11,
+    textAlign: 'center',
+    opacity: 0.5,
+    marginTop: 57,
+  },
+});
