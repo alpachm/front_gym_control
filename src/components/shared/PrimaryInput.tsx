@@ -8,6 +8,7 @@ interface Props {
   icon: (props: SvgProps) => React.JSX.Element;
   onChenge: (e: string) => void;
   inputMode: 'text' | 'numeric' | 'email';
+  secureTextEntry?: boolean;
 }
 
 const PrimaryInput = (props: Props) => {
@@ -26,7 +27,7 @@ const PrimaryInput = (props: Props) => {
         onChangeText={props.onChenge}
         inputMode={props.inputMode}
         onFocus={() => setIsFocused(true)}
-        secureTextEntry
+        secureTextEntry={props.secureTextEntry}
       />
     </View>
   );

@@ -28,7 +28,8 @@ const LoginScreen = () => {
           placeholder={t('PlaceholderText:Enter_Password')}
           onChenge={(e) => console.log(e)}
           icon={IconKey}
-          inputMode="email"
+          inputMode="text"
+          secureTextEntry
         />
         <TextCallToAction
           onPress={() => {}}
