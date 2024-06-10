@@ -1,9 +1,40 @@
 {
-    "Start_Screen": {
+    "Actions": {
+        "Add_Exercise_Image": "Add an image to the exercise",
+        "Consult": "Consult",
+        "Create_Exercise": "Create exercise",
+        "Create_Routine": "Create routine",
+        "Enter": "Enter",
+        "Login": "Login",
+        "Logout": "Logout",
+        "Optional": "Optional",
+        "Register": "Register",
+        "Select_Language": "Select the language",
+        "Select_Measurement_System": "Select the measurement system",
+        "Select_Theme": "Select the theme"
+    },
+    "StartScreen": {
         "Title": "Boost your progress",
         "Caption_1": "Control your routine and",
         "Caption_2": "Keeping track of your weight weekly ensures continuous improvements",
-        "Login": "Log in",
         "Register": "Not registered? Sign up"
+    },
+    "LoginScreen": {
+        "Title": "Hey, welcome back",
+        "Forgot_Password": "Did you forget your password?",
+        "Or_Enter": "Or enter with"
+    },
+    "PlaceholderText": {
+        "Confirm_Password": "Confirm your password",
+        "Enter_Email": "Enter your email",
+        "Enter_Password": "Enter your password",
+        "Enter_Name": "Enter your name",
+        "Enter_Last_Name": "Enter your last name",
+        "Enter_Routine_Name": "Enter routine name",
+        "Enter_Routine_Day": "Enter routine day",
+        "Enter_Exercise_Name": "Enter the name of the exercise",
+        "Enter_Weight": "Enter weight",
+        "Enter_Reps": "Enter number of repetitions",
+        "Select_Routine": "Select the routine"
     }
 }

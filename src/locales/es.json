@@ -1,9 +1,40 @@
 {
-    "Start_Screen": {
+    "Actions": {
+        "Add_Exercise_Image": "Agrega una imagen la ejercicio",
+        "Consult": "Consultar",
+        "Create_Exercise": "Crear ejercicio",
+        "Create_Routine": "Crear rutina",
+        "Enter": "Ingresar",
+        "Login": "Iniciar sesión",
+        "Logout": "Cerrar sesión",
+        "Optional": "Opcional",
+        "Register": "Registrarme",
+        "Select_Language": "Selecciona el lenguaje",
+        "Select_Measurement_System": "Selecciona el sistema de medición",
+        "Select_Theme": "Selecciona el tema"
+    },
+    "StartScreen": {
         "Title": "Potencializa tu progreso",
         "Caption_1": "Controla tu rutina y",
         "Caption_2": "Llevar el control semanal de tus pesos asegura mejoras continuas",
-        "Login": "Iniciar sesión",
-        "Register": "¿No estás registrado? Registrate"
+        "Register": "¿No estás registrado? Registrate" 
+    },
+    "LoginScreen": {
+        "Title": "Hey, bienvenido nuevamente",
+        "Forgot_Password": "¿Olvidaste tu contraseña?",
+        "Or_Enter": "O ingresa con"
+    },
+    "PlaceholderText": {
+        "Confirm_Password": "Confirma tu contraseña",
+        "Enter_Email": "Ingresa tu email",
+        "Enter_Password": "Ingresa tu contraseña",
+        "Enter_Name": "Ingresa tu nombre",
+        "Enter_Last_Name": "Ingresa tu apellido",
+        "Enter_Routine_Name": "Ingresa nombre de rutina",
+        "Enter_Routine_Day": "Ingresa día de rutina",
+        "Enter_Exercise_Name": "Ingresa el nombre del ejercicio",
+        "Enter_Weight": "Ingresa peso",
+        "Enter_Reps": "Ingrese número de repeticiones",
+        "Select_Routine": "Seleccione la rutina"
     }
 }

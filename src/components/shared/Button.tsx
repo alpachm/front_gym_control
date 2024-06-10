@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Pressable, StyleSheet, Text } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { SvgProps } from 'react-native-svg';
 import { ThemeContext } from '../../context/themeContext';
 import { useTranslation } from 'react-i18next';
@@ -25,12 +25,11 @@ const Button = (props: Props) => {
         opacity: pressed ? 0.8 : 1,
         width: props.width ?? 250,
         height: props.height ?? 60,
-        justifyContent: props.icon ? "flex-end" : "center",
         gap: props.icon ? 35 : 0
       }]}
     >
       <Text style={{...styles.text, color: theme.white}}>{props.label}</Text>
-      {props.icon ? <props.icon width={30} height={30} fill={theme.white} /> : null}
+      {props.icon ? <View style={styles.icon}><props.icon width={30} height={30} fill={theme.white} /></View> : null}
     </Pressable>
   );
 };
@@ -42,8 +41,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     borderRadius: 10,
     alignItems: "center",
+    justifyContent: "center",
     padding: 16,
+    position: "relative"
   },
+  icon: { position: "absolute", right: 20},
   text: {
     fontFamily: "Inter_700Bold",
     textTransform: "lowercase",

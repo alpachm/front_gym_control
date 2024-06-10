@@ -61,7 +61,7 @@ const PrincipalLayout = (props: Props) => {
     const imagePath = getImageBackground(props.status);
     return (
       <ImageBackground
-        style={{ ...styles.imageBackground, paddingTop: top }}
+        style={{ ...styles.imageBackground, paddingTop: top, backgroundColor: theme.black }}
         source={imagePath}
       >
         {renderBackArrow()}

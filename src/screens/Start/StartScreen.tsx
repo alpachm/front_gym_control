@@ -10,11 +10,13 @@ import IconButtonRightArrow from '../../icons/IconButtonRightArrow';
 import openUrl from '../../utils/openUrl';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParams } from '../../navigation/StackNavigator';
+import Title from '../../components/shared/Title';
+import TextCallToAction from '../../components/shared/TextCallToAction';
 
 const StartScreen = () => {
   const { theme } = useContext(ThemeContext);
   const navigation = useNavigation<NavigationProp<RootStackParams>>();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const globalStyles = useGlobalStyles();
 
   return (
@@ -28,35 +30,31 @@ const StartScreen = () => {
               ...styles.caption_1,
             }}
           >
-            {t('Start_Screen:Caption_1')}
+            {t('StartScreen:Caption_1')}
           </Text>
-          <Text style={globalStyles.title}>{t('Start_Screen:Title')}</Text>
+          <Title>{t('StartScreen:Title')}</Title>
           <Text
             style={{
               ...globalStyles.caption,
               ...styles.caption_2,
             }}
           >
-            {t('Start_Screen:Caption_2')}
+            {t('StartScreen:Caption_2')}
           </Text>
         </View>
         <View style={styles.bottom_view}>
           <Button
-            label={t('Start_Screen:Login')}
-            onPres={() => navigation.navigate("Login")}
+            label={t('Actions:Login')}
+            onPres={() => navigation.navigate('Login')}
             icon={IconButtonRightArrow}
             height={76}
           />
-          <Pressable onPress={() => navigation.navigate("Register")}>
-            <Text
-              style={{
-                ...styles.register,
-                color: theme.white,
-              }}
-            >
-              {t('Start_Screen:Register')}
-            </Text>
-          </Pressable>
+          <TextCallToAction
+            onPress={() => navigation.navigate('Register')}
+            styles={{ marginTop: 25, marginBottom: 57 }}
+          >
+            {t('StartScreen:Register')}
+          </TextCallToAction>
           <Pressable
             onPress={() =>
               openUrl('https://alex-pacheco-portafolio.netlify.app/')
@@ -95,16 +93,11 @@ const styles = StyleSheet.create({
     fontSize: 20,
     letterSpacing: 2,
   },
-  register: {
-    fontFamily: 'Inter_400Regular',
-    textAlign: 'center',
-    marginTop: 25,
-  },
   footer_text: {
     fontFamily: 'Inter_100Thin',
     fontSize: 11,
     textAlign: 'center',
     opacity: 0.5,
-    marginTop: 57,
+    // marginTop: 57,
   },
 });
