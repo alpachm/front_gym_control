@@ -5,6 +5,7 @@
         "Create_Exercise": "Crear ejercicio",
         "Create_Routine": "Crear rutina",
         "Enter": "Ingresar",
+        "Or_Enter": "O ingresa con",
         "Login": "Iniciar sesión",
         "Logout": "Cerrar sesión",
         "Optional": "Opcional",
@@ -21,8 +22,10 @@
     },
     "LoginScreen": {
         "Title": "Hey, bienvenido nuevamente",
-        "Forgot_Password": "¿Olvidaste tu contraseña?",
-        "Or_Enter": "O ingresa con"
+        "Forgot_Password": "¿Olvidaste tu contraseña?"
+    },
+    "RegisterScreen": {
+        "Title": "Transforma tu vida hoy"
     },
     "PlaceholderText": {
         "Confirm_Password": "Confirma tu contraseña",

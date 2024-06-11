@@ -24,6 +24,9 @@
         "Forgot_Password": "Did you forget your password?",
         "Or_Enter": "Or enter with"
     },
+    "RegisterScreen": {
+        "Title": "Transform your life today"
+    },
     "PlaceholderText": {
         "Confirm_Password": "Confirm your password",
         "Enter_Email": "Enter your email",

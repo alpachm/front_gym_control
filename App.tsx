@@ -13,6 +13,7 @@ import {
 } from '@expo-google-fonts/inter';
 import * as SplashScreen from 'expo-splash-screen';
 import { useFonts } from 'expo-font';
+import { StatusBar } from 'react-native';
 
 export default function App() {
   const [loadedFonts] = useFonts({
@@ -37,10 +38,13 @@ export default function App() {
   if (!loadedFonts) return null;
 
   return (
-    <ThemeContextProvider>
-      <NavigationContainer>
-        <StackNavigator />
-      </NavigationContainer>
-    </ThemeContextProvider>
+    <>
+      <StatusBar translucent backgroundColor={"transparent"} barStyle={'default'} />
+      <ThemeContextProvider>
+        <NavigationContainer>
+          <StackNavigator />
+        </NavigationContainer>
+      </ThemeContextProvider>
+    </>
   );
 }
