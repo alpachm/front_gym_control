@@ -39,5 +39,11 @@
         "Enter_Weight": "Enter weight",
         "Enter_Reps": "Enter number of repetitions",
         "Select_Routine": "Select the routine"
+    },
+    "HomeScreen": {
+        "Subtitle": "Control your days",
+        "Routines": "Routines",
+        "Exercises": "Exercises",
+        "Take_Control": "Take control of your daily activity"
     }
 }

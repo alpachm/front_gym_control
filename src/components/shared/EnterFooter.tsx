@@ -18,7 +18,7 @@ const EnterFooter = (props: Props) => {
 
   return (
     <View style={styles.container}>
-      <Button label={props.buttonLabel} onPres={props.onPress} />
+      <Button label={props.buttonLabel} onPress={props.onPress} toLowerCase />
       <Text style={globalStyles.text_or}>{t("Actions:Or_Enter")}</Text>
       <Pressable style={({pressed}) => [{ ...styles.button, borderColor: theme.white, opacity: pressed ? 0.5 : 1 }]}>
         <IconGoogle width={23} height={23} />

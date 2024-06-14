@@ -1,12 +1,29 @@
-import React from 'react'
-import { Text, View } from 'react-native'
+import React, { useContext } from 'react';
+import {
+  ScrollView,
+  StyleSheet,
+} from 'react-native';
+import PrincipalLayout from '../../PrincipalLayout';
+import { ThemeContext } from '../../context/themeContext';
+import MainHomeScreen from '../../components/HomeScreen/MainHomeScreen';
 
 const HomeScreen = () => {
-  return (
-    <View>
-        <Text>HomeScreen</Text>
-    </View>
-  )
-}
+  const {theme} = useContext(ThemeContext);
 
-export default HomeScreen
+  return (
+    <PrincipalLayout status="Home">
+      <ScrollView style={styles.container}>
+          <MainHomeScreen />
+      </ScrollView>
+    </PrincipalLayout>
+  );
+};
+
+export default HomeScreen;
+
+const styles = StyleSheet.create({
+  container: {
+    paddingTop: 100,
+    paddingHorizontal: 30
+  },
+});

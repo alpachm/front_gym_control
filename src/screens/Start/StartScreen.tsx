@@ -45,9 +45,10 @@ const StartScreen = () => {
         <View style={styles.bottom_view}>
           <Button
             label={t('Actions:Login')}
-            onPres={() => navigation.navigate('Login')}
+            onPress={() => navigation.navigate('Login')}
             icon={IconButtonRightArrow}
             height={76}
+            toLowerCase
           />
           <TextCallToAction
             onPress={() => navigation.navigate('Register')}

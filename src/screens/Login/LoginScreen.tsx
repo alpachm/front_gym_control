@@ -48,7 +48,7 @@ const LoginScreen = () => {
         <Title>{t('LoginScreen:Title')}</Title>
         <View style={styles.view}>
           {renderInputs()}
-          <EnterFooter buttonLabel={t('Actions:Enter')} onPress={() => navigation.navigate("Home")} />
+          <EnterFooter buttonLabel={t('Actions:Enter')} onPress={() => navigation.navigate("BottomTabsNavigator")} />
         </View>
       </View>
     </PrincipalLayout>

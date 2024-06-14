@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import {
+  ColorSchemeName,
   ImageBackground,
   Pressable,
-  ScrollView,
   StyleSheet,
-  TouchableOpacity,
+  useColorScheme,
   View,
 } from 'react-native';
 import useGlobalStyles from './styles/useGlobalStyles';
@@ -21,9 +21,22 @@ interface Props {
 
 const PrincipalLayout = (props: Props) => {
   const { theme } = useContext(ThemeContext);
+  const colorScheme = useColorScheme();
   const navigation = useNavigation();
   const { top } = useSafeAreaInsets();
   const globalStyles = useGlobalStyles();
+
+  const isUnauthorizedScreen = () => {
+    if (
+      props.status === 'Start' ||
+      props.status === 'Login' ||
+      props.status === 'Register'
+    ) {
+      return true;
+    }else {
+      return false;
+    }
+  }
 
   const renderBackArrow = () => {
     return (
@@ -57,11 +70,15 @@ const PrincipalLayout = (props: Props) => {
     }
   };
 
+  const getHomeImageBackground = (colorScheme: ColorSchemeName) => {
+    return colorScheme === "light" ? require("./../assets/bg_home_1.png") : require("./../assets/bg_home_2.png");
+  }
+
   const renderImageBackground = () => {
     const imagePath = getImageBackground(props.status);
     return (
       <ImageBackground
-        style={{ ...styles.imageBackground, paddingTop: top, backgroundColor: theme.black }}
+        style={{ ...styles.imageBackground, ...styles.globalPadding, paddingTop: top, backgroundColor: theme.black }}
         source={imagePath}
       >
         {renderBackArrow()}
@@ -70,12 +87,24 @@ const PrincipalLayout = (props: Props) => {
     );
   };
 
-  if (
-    props.status === 'Start' ||
-    props.status === 'Login' ||
-    props.status === 'Register'
-  ) {
+  const renderHomeImageBackground = () => {
+    const imagePath = getHomeImageBackground(colorScheme);
+    return (
+      <ImageBackground
+      source={imagePath}
+      style={{...styles.homeImageBackground, backgroundColor: theme.bg_color}}
+      >
+        {props.children}
+      </ImageBackground>
+    )
+  }
+
+  if (isUnauthorizedScreen()) {
     return renderImageBackground();
+  }
+
+  if(props.status === "Home"){
+    return renderHomeImageBackground();
   }
 
   return <View style={globalStyles.layout_container}>{props.children}</View>;
@@ -86,8 +115,14 @@ export default PrincipalLayout;
 const styles = StyleSheet.create({
   imageBackground: {
     flex: 1,
-    paddingVertical: 30,
-    paddingHorizontal: 30,
+  },
+  globalPadding: {
+    padding: 30
+  },
+  homeImageBackground: {
+    flex: 1,
+    width: "100%",
+    height: 360,
   },
   view: {},
   arrow: {
