@@ -44,6 +44,18 @@
         "Subtitle": "Control your days",
         "Routines": "Routines",
         "Exercises": "Exercises",
-        "Take_Control": "Take control of your daily activity"
+        "Take_Control": "Take control of your daily activity",
+        "Reps": "Repetitions",
+        "Last_Weight": "Last weight",
+        "Current_Weight": "Current weight"
+    },
+    "Days": {
+        "Monday": "Monday",
+        "Tuesday": "Tuesday",
+        "Wednesday": "Wednesday",
+        "Thursday": "Thursday",
+        "Friday": "Friday",
+        "Saturday": "Saturday",
+        "Sunday": "Sunday"
     }
 }

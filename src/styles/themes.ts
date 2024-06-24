@@ -2,7 +2,7 @@ export interface ITheme {
     primary: string;
     bg_color: string;
     bg_modal: string;
-    bg_input: string;
+    bg_table: string;
     bg_primary_input: string;
     text_color: string;
     icon_color: string;
@@ -17,7 +17,7 @@ export const light_theme: ITheme = {
     primary: "#ED7D31",
     bg_color: "#DFDDC7",
     bg_modal: "#FFFAF4",
-    bg_input: "#FFFAF4",
+    bg_table: "#FFFAF4",
     bg_primary_input: "#383838",
     text_color: "#242222",
     icon_color: "#0C0C0C",
@@ -32,7 +32,7 @@ export const dark_theme: ITheme = {
     primary: "#ED7D31",
     bg_color: "#0C0C0C",
     bg_modal: "#333333",
-    bg_input: "#333333",
+    bg_table: "#333333",
     bg_primary_input: "#383838",
     text_color: "#FFFAF4",
     icon_color: "#FFFAF4",

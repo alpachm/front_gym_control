@@ -44,6 +44,18 @@
         "Subtitle": "Controla tus días",
         "Routines": "Rutinas",
         "Exercises": "Ejercicios",
-        "Take_Control": "Lleva el control de tu actividad diaria"
+        "Take_Control": "Lleva el control de tu actividad diaria",
+        "Reps": "Repeticiones",
+        "Last_Weight": "Último peso",
+        "Current_Weight": "Peso actual"
+    },
+    "Days": {
+        "Monday": "Lunes",
+        "Tuesday": "Martes",
+        "Wednesday": "Miércoles",
+        "Thursday": "Jueves",
+        "Friday": "Viernes",
+        "Saturday": "Sábado",
+        "Sunday": "Domingo"
     }
 }
