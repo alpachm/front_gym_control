@@ -47,7 +47,8 @@
         "Take_Control": "Lleva el control de tu actividad diaria",
         "Reps": "Repeticiones",
         "Last_Weight": "Último peso",
-        "Current_Weight": "Peso actual"
+        "Current_Weight": "Peso actual",
+        "Enter_Weight": "Ingresar"
     },
     "Days": {
         "Monday": "Lunes",

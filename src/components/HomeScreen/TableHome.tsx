@@ -1,10 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   Image,
+  NativeSyntheticEvent,
   Pressable,
   StyleSheet,
   Text,
   TextInput,
+  TextInputFocusEventData,
   View,
 } from 'react-native';
 import ExerciseEntity from '../../entities/exercise.entity';
@@ -22,6 +24,7 @@ interface Props {
 const TableHome = (props: Props) => {
   const { theme } = useContext(ThemeContext);
   const { t } = useTranslation();
+  const [currentWeight, setCurrentWeight] = useState(0);
 
   const renderHeader = () => {
     return (
@@ -54,7 +57,13 @@ const TableHome = (props: Props) => {
           <Text style={{ ...styles.subtitle, color: theme.text_color }}>
             {t('HomeScreen:Current_Weight')}
           </Text>
-          <TextInput />
+          <Pressable
+            style={({ pressed }) => [
+              { ...styles.buttonEnter, borderColor: theme.text_color, opacity: pressed ? 0.5 : 1 }
+            ]}
+          >
+            <Text style={{...styles.buttonEnterText, color: theme.text_color}}>{t('HomeScreen:Enter_Weight')}</Text>
+          </Pressable>
         </View>
       </View>
     );
@@ -89,12 +98,19 @@ const TableHome = (props: Props) => {
           style={({ pressed }) => [
             {
               ...styles.buttonIcon,
-              backgroundColor: theme.primary,
+              ...styles.buttonCheckIcon,
+              borderColor: props.exercise.completed
+                ? theme.white
+                : theme.light_green,
               opacity: pressed ? 0.5 : 1,
             },
           ]}
         >
-          <IconCheck width={10} height={11} fill={theme.white} />
+          <IconCheck
+            width={10}
+            height={11}
+            fill={props.exercise.completed ? theme.white : theme.light_green}
+          />
         </Pressable>
       </View>
     );
@@ -104,15 +120,13 @@ const TableHome = (props: Props) => {
     <View
       style={{
         ...styles.table,
-        backgroundColor: theme.bg_table,
-        // INTENTO DE IMPLEMENTAR LOGICA DE COLOR FONDO
-        // backgroundColor: finished.includes(props.exercise.id)
-        //   ? theme.green
-        //   : theme.bg_table,
+        backgroundColor: props.exercise.completed
+          ? theme.green
+          : theme.bg_table,
       }}
     >
       <Image source={{ uri: props.exercise.img_url }} style={styles.image} />
-      <View>
+      <View style={styles.rightContainer}>
         {renderHeader()}
         {renderMain()}
         {renderFooter()}
@@ -137,6 +151,11 @@ const styles = StyleSheet.create({
     width: 165,
     height: 125,
     borderRadius: 10,
+  },
+  rightContainer: {
+    flex: 1,
+    height: '100%',
+    justifyContent: 'space-between',
   },
   name: {
     fontSize: 16,
@@ -179,5 +198,17 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  buttonCheckIcon: {
+    borderWidth: 1,
+  },
+  buttonEnter: {
+    height: 15,
+    borderWidth: 0.2,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttonEnterText: {
+    fontSize: 9,
   },
 });

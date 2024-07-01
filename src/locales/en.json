@@ -47,7 +47,8 @@
         "Take_Control": "Take control of your daily activity",
         "Reps": "Repetitions",
         "Last_Weight": "Last weight",
-        "Current_Weight": "Current weight"
+        "Current_Weight": "Current weight",
+        "Enter_Weight": "Enter"
     },
     "Days": {
         "Monday": "Monday",

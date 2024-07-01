@@ -7,6 +7,7 @@ export interface ITheme {
     text_color: string;
     icon_color: string;
     white: string;
+    light_green: string;
     green: string;
     red: string;
     blue: string;
@@ -22,6 +23,7 @@ export const light_theme: ITheme = {
     text_color: "#242222",
     icon_color: "#0C0C0C",
     white: "#FFFAF4",
+    light_green: "#ADD899",
     green: "#80DC4B",
     red: "#C70D3A",
     blue: "#5484FF",
@@ -37,6 +39,7 @@ export const dark_theme: ITheme = {
     text_color: "#FFFAF4",
     icon_color: "#FFFAF4",
     white: "#FFFAF4",
+    light_green: "#ADD899",
     green: "#02383C",
     red: "#C70D3A",
     blue: "#5484FF",
