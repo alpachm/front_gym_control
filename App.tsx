@@ -6,6 +6,7 @@ import './i18n';
 import { ThemeContextProvider } from './src/context/themeContext';
 import {
   Inter_100Thin,
+  Inter_300Light,
   Inter_400Regular,
   Inter_700Bold,
   Inter_800ExtraBold,
@@ -18,6 +19,7 @@ import { StatusBar } from 'react-native';
 export default function App() {
   const [loadedFonts] = useFonts({
     Inter_100Thin,
+    Inter_300Light,
     Inter_400Regular,
     Inter_700Bold,
     Inter_800ExtraBold,
@@ -39,7 +41,11 @@ export default function App() {
 
   return (
     <>
-      <StatusBar translucent backgroundColor={"transparent"} barStyle={'default'} />
+      <StatusBar
+        translucent
+        backgroundColor={'transparent'}
+        barStyle={'default'}
+      />
       <ThemeContextProvider>
         <NavigationContainer>
           <StackNavigator />

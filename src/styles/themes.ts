@@ -1,5 +1,6 @@
 export interface ITheme {
     primary: string;
+    backdrop_color: string;
     bg_color: string;
     bg_modal: string;
     bg_table: string;
@@ -16,6 +17,7 @@ export interface ITheme {
 
 export const light_theme: ITheme = {
     primary: "#ED7D31",
+    backdrop_color: "rgba(12, 12, 12, 0.8)",
     bg_color: "#DFDDC7",
     bg_modal: "#FFFAF4",
     bg_table: "#FFFAF4",
@@ -32,6 +34,7 @@ export const light_theme: ITheme = {
 
 export const dark_theme: ITheme = {
     primary: "#ED7D31",
+    backdrop_color: "rgba(12, 12, 12, 0.8)",
     bg_color: "#0C0C0C",
     bg_modal: "#333333",
     bg_table: "#333333",

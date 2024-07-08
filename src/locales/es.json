@@ -58,5 +58,12 @@
         "Friday": "Viernes",
         "Saturday": "Sábado",
         "Sunday": "Domingo"
+    },
+    "Modal": {
+        "Enter_Weight": "Ingresar peso",
+        "Create": "Crear",
+        "Enter": "Ingresar",
+        "Cancel": "Cancelar",
+        "Unit": "Unidad"
     }
 }

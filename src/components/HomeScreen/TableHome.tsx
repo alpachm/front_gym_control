@@ -1,14 +1,5 @@
-import React, { useContext, useState } from 'react';
-import {
-  Image,
-  NativeSyntheticEvent,
-  Pressable,
-  StyleSheet,
-  Text,
-  TextInput,
-  TextInputFocusEventData,
-  View,
-} from 'react-native';
+import React, { Dispatch, SetStateAction, useContext, useState } from 'react';
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import ExerciseEntity from '../../entities/exercise.entity';
 import { ThemeContext } from '../../context/themeContext';
 import { useTranslation } from 'react-i18next';
@@ -19,6 +10,7 @@ import { toCapitalize } from '../../utils/formatText';
 
 interface Props {
   exercise: ExerciseEntity;
+  setShowModal: Dispatch<SetStateAction<boolean>>;
 }
 
 const TableHome = (props: Props) => {
@@ -42,7 +34,7 @@ const TableHome = (props: Props) => {
     );
   };
 
-  const renderMain = () => {
+  const renderContent = () => {
     return (
       <View style={styles.mainContainer}>
         <View>
@@ -59,10 +51,21 @@ const TableHome = (props: Props) => {
           </Text>
           <Pressable
             style={({ pressed }) => [
-              { ...styles.buttonEnter, borderColor: theme.text_color, opacity: pressed ? 0.5 : 1 }
+              {
+                ...styles.buttonEnter,
+                borderColor: theme.text_color,
+                opacity: pressed ? 0.5 : 1,
+              },
             ]}
+            onPress={() => {
+              props.setShowModal(true);
+            }}
           >
-            <Text style={{...styles.buttonEnterText, color: theme.text_color}}>{t('HomeScreen:Enter_Weight')}</Text>
+            <Text
+              style={{ ...styles.buttonEnterText, color: theme.text_color }}
+            >
+              {t('HomeScreen:Enter_Weight')}
+            </Text>
           </Pressable>
         </View>
       </View>
@@ -128,7 +131,7 @@ const TableHome = (props: Props) => {
       <Image source={{ uri: props.exercise.img_url }} style={styles.image} />
       <View style={styles.rightContainer}>
         {renderHeader()}
-        {renderMain()}
+        {renderContent()}
         {renderFooter()}
       </View>
     </View>

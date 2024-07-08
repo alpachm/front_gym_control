@@ -58,5 +58,12 @@
         "Friday": "Friday",
         "Saturday": "Saturday",
         "Sunday": "Sunday"
+    },
+    "Modal": {
+        "Enter_Weight": "Enter weight",
+        "Create": "Create",
+        "Enter": "Enter",
+        "Cancel": "Cancel",
+        "Unit": "Unit"
     }
 }
