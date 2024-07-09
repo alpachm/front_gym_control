@@ -1,6 +1,11 @@
-import React, { Dispatch, SetStateAction, useContext, useRef } from "react";
+import React, {
+  Dispatch,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useRef,
+} from "react";
 import { StatusBar, StyleSheet, Text, TextInput, View } from "react-native";
-import ReactNativeModal from "react-native-modal";
 import { ThemeContext } from "../../context/themeContext";
 import ModalButton from "../shared/ModalButton";
 import { useTranslation } from "react-i18next";
@@ -21,6 +26,10 @@ const EnterWeightModal = (props: Props) => {
   const { theme } = useContext(ThemeContext);
   const { t } = useTranslation();
   const currentWeight = useRef(0);
+
+  useEffect(() => {
+    currentWeight.current = 0;
+  }, []);
 
   const data = [
     {

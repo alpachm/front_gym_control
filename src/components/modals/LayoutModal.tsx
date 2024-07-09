@@ -1,6 +1,6 @@
-import React, { ReactNode, useContext } from 'react';
-import ReactNativeModal from 'react-native-modal';
-import { ThemeContext } from '../../context/themeContext';
+import React, { ReactNode, useContext } from "react";
+import ReactNativeModal from "react-native-modal";
+import { ThemeContext } from "../../context/themeContext";
 
 interface Props {
   children: ReactNode;
@@ -15,6 +15,7 @@ const LayoutModal = (props: Props) => {
       isVisible={props.isVisible}
       backdropColor={theme.black}
       backdropOpacity={0.8}
+      animationIn={"bounceInDown"}
     >
       {props.children}
     </ReactNativeModal>
