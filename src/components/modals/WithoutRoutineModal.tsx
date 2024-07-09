@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction, useContext } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar, StyleSheet, Text, View } from 'react-native';
 import LayoutModal from './LayoutModal';
 import { ThemeContext } from '../../context/themeContext';
 import ModalButton from '../shared/ModalButton';
@@ -34,14 +34,19 @@ const WithoutRoutineModal = (props: Props) => {
   };
 
   return (
-    <LayoutModal isVisible={props.isVisible}>
-      <View style={{ ...styles.modal, backgroundColor: theme.bg_modal }}>
-        <Text style={{ ...styles.text, color: theme.text_color }}>
-          {t('Modal:Without_Routine')}
-        </Text>
-        {renderButtons()}
-      </View>
-    </LayoutModal>
+    <>
+      <StatusBar
+        backgroundColor={props.isVisible ? theme.backdrop_color : 'transparent'}
+      />
+      <LayoutModal isVisible={props.isVisible}>
+        <View style={{ ...styles.modal, backgroundColor: theme.bg_modal }}>
+          <Text style={{ ...styles.text, color: theme.text_color }}>
+            {t('Modal:Without_Routine')}
+          </Text>
+          {renderButtons()}
+        </View>
+      </LayoutModal>
+    </>
   );
 };
 

@@ -1,14 +1,14 @@
-import React, { Dispatch, SetStateAction, useContext, useRef } from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
-import ReactNativeModal from 'react-native-modal';
-import { ThemeContext } from '../../context/themeContext';
-import ModalButton from '../shared/ModalButton';
-import { useTranslation } from 'react-i18next';
-import SelectDropdown from 'react-native-select-dropdown';
-import IconDownArrow from '../../icons/IconDownArrow';
-import { UserContext } from '../../context/userContext';
-import exerciseData from '../../utils/exercises.data';
-import LayoutModal from './LayoutModal';
+import React, { Dispatch, SetStateAction, useContext, useRef } from "react";
+import { StatusBar, StyleSheet, Text, TextInput, View } from "react-native";
+import ReactNativeModal from "react-native-modal";
+import { ThemeContext } from "../../context/themeContext";
+import ModalButton from "../shared/ModalButton";
+import { useTranslation } from "react-i18next";
+import SelectDropdown from "react-native-select-dropdown";
+import IconDownArrow from "../../icons/IconDownArrow";
+import { UserContext } from "../../context/userContext";
+import exerciseData from "../../utils/exercises.data";
+import LayoutModal from "./LayoutModal";
 
 interface Props {
   isVisible: boolean;
@@ -22,7 +22,14 @@ const EnterWeightModal = (props: Props) => {
   const { t } = useTranslation();
   const currentWeight = useRef(0);
 
-  const data = [{ title: 'kg' }, { title: 'lb' }];
+  const data = [
+    {
+      title: "kg",
+    },
+    {
+      title: "lb",
+    },
+  ];
 
   const handleEnter = () => {
     exerciseData.map((exercise) => {
@@ -60,7 +67,7 @@ const EnterWeightModal = (props: Props) => {
           onChangeText={(value) => {
             currentWeight.current = +value;
           }}
-          placeholder={t('Modal:Enter_Weight')}
+          placeholder={t("Modal:Enter_Weight")}
           placeholderTextColor={theme.text_color}
           cursorColor={theme.primary}
           selectionColor={theme.primary}
@@ -78,12 +85,16 @@ const EnterWeightModal = (props: Props) => {
                   ...styles.unitsContainer,
                   ...styles.input,
                   borderColor: theme.text_color,
-                  width: '30%',
+                  width: "30%",
                   borderLeftWidth: 0,
                 }}
               >
-                <Text style={{ color: theme.text_color }}>
-                  {(selectedItem && selectedItem.title) || t('Modal:Unit')}
+                <Text
+                  style={{
+                    color: theme.text_color,
+                  }}
+                >
+                  {(selectedItem && selectedItem.title) || t("Modal:Unit")}
                 </Text>
                 <IconDownArrow width={11} height={11} fill={theme.text_color} />
               </View>
@@ -94,7 +105,9 @@ const EnterWeightModal = (props: Props) => {
               <View
                 style={{
                   ...styles.dropdownItemStyle,
-                  ...(isSelected && { backgroundColor: theme.primary }),
+                  ...(isSelected && {
+                    backgroundColor: theme.primary,
+                  }),
                   backgroundColor: theme.bg_modal,
                 }}
               >
@@ -116,12 +129,22 @@ const EnterWeightModal = (props: Props) => {
   };
 
   return (
-    <LayoutModal isVisible={props.isVisible}>
-      <View style={{ ...styles.modal, backgroundColor: theme.bg_table }}>
-        {renderInputs()}
-        {renderButtons()}
-      </View>
-    </LayoutModal>
+    <>
+      <StatusBar
+        backgroundColor={props.isVisible ? theme.backdrop_color : "transparent"}
+      />
+      <LayoutModal isVisible={props.isVisible}>
+        <View
+          style={{
+            ...styles.modal,
+            backgroundColor: theme.bg_table,
+          }}
+        >
+          {renderInputs()}
+          {renderButtons()}
+        </View>
+      </LayoutModal>
+    </>
   );
 };
 
@@ -130,39 +153,39 @@ export default EnterWeightModal;
 const styles = StyleSheet.create({
   modal: {
     borderRadius: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     gap: 20,
     padding: 20,
   },
   container: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   unitsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   input: {
-    width: '70%',
+    width: "70%",
     borderWidth: 0.5,
     height: 35,
     paddingHorizontal: 10,
-    fontFamily: 'Inter_300Light',
+    fontFamily: "Inter_300Light",
   },
   buttonsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
     gap: 10,
   },
   dropdownItemStyle: {
-    width: '100%',
+    width: "100%",
     paddingHorizontal: 12,
     paddingVertical: 8,
   },
   dropdownItemTxtStyle: {
-    fontFamily: 'Inter_300Light',
+    fontFamily: "Inter_300Light",
     fontSize: 17,
   },
 });

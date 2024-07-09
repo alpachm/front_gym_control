@@ -13,7 +13,7 @@ const ContentHomeScreen = () => {
   const { theme } = useContext(ThemeContext);
   const [selectedDay, setSelectedDay] = useState(0);
   const [showEnterWeightModal, setShowEnterWeightModal] = useState(false);
-  const [showWithoutRoutineModal, setShowWithoutRoutineModal] = useState(false);
+  const [showWithoutRoutineModal, setShowWithoutRoutineModal] = useState(true);
 
   const renderDaysOptions = () => {
     return (
