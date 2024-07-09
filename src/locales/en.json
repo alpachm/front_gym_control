@@ -64,6 +64,7 @@
         "Create": "Create",
         "Enter": "Enter",
         "Cancel": "Cancel",
-        "Unit": "Unit"
+        "Unit": "Unit",
+        "Without_Routine": "You still don't have a routine assigned for this day. Do you want to assign one?"
     }
 }

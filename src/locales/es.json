@@ -64,6 +64,7 @@
         "Create": "Crear",
         "Enter": "Ingresar",
         "Cancel": "Cancelar",
-        "Unit": "Unidad"
+        "Unit": "Unidad",
+        "Without_Routine": "Aún no tienes rutina asignada para este día ¿Deseas asignar una?"
     }
 }

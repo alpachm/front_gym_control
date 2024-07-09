@@ -8,6 +8,7 @@ import SelectDropdown from 'react-native-select-dropdown';
 import IconDownArrow from '../../icons/IconDownArrow';
 import { UserContext } from '../../context/userContext';
 import exerciseData from '../../utils/exercises.data';
+import LayoutModal from './LayoutModal';
 
 interface Props {
   isVisible: boolean;
@@ -115,16 +116,12 @@ const EnterWeightModal = (props: Props) => {
   };
 
   return (
-    <ReactNativeModal
-      isVisible={props.isVisible}
-      backdropColor={theme.black}
-      backdropOpacity={0.8}
-    >
+    <LayoutModal isVisible={props.isVisible}>
       <View style={{ ...styles.modal, backgroundColor: theme.bg_table }}>
         {renderInputs()}
         {renderButtons()}
       </View>
-    </ReactNativeModal>
+    </LayoutModal>
   );
 };
 
@@ -136,10 +133,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     gap: 20,
-    paddingVertical: 20,
+    padding: 20,
   },
   container: {
-    width: '80%',
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
@@ -156,9 +152,9 @@ const styles = StyleSheet.create({
     fontFamily: 'Inter_300Light',
   },
   buttonsContainer: {
-    width: '80%',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
+    gap: 10,
   },
   dropdownItemStyle: {
     width: '100%',

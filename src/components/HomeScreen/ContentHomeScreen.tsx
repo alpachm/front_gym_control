@@ -1,17 +1,19 @@
 import React, { useContext, useState } from 'react';
 import { ScrollView } from 'react-native-gesture-handler';
 import days from '../../utils/days';
-import { Pressable, StatusBar, StyleSheet, View } from 'react-native';
+import { Pressable, StyleSheet, View } from 'react-native';
 import Day from './Day';
 import { ThemeContext } from '../../context/themeContext';
 import exerciseData from '../../utils/exercises.data';
 import TableHome from './TableHome';
 import EnterWeightModal from '../modals/EnterWeightModal';
+import WithoutRoutineModal from '../modals/WithoutRoutineModal';
 
 const ContentHomeScreen = () => {
   const { theme } = useContext(ThemeContext);
   const [selectedDay, setSelectedDay] = useState(0);
-  const [showModal, setShowModal] = useState(false);
+  const [showEnterWeightModal, setShowEnterWeightModal] = useState(false);
+  const [showWithoutRoutineModal, setShowWithoutRoutineModal] = useState(false);
 
   const renderDaysOptions = () => {
     return (
@@ -44,7 +46,7 @@ const ContentHomeScreen = () => {
           <TableHome
             key={exercise.id}
             exercise={exercise}
-            setShowModal={setShowModal}
+            setShowModal={setShowEnterWeightModal}
           />
         ))}
       </View>
@@ -52,16 +54,18 @@ const ContentHomeScreen = () => {
   };
 
   return (
-    <>
-      <StatusBar
-        backgroundColor={showModal ? theme.backdrop_color : 'transparent'}
+    <ScrollView>
+      {renderDaysOptions()}
+      {renderExerciseList()}
+      <EnterWeightModal
+        isVisible={showEnterWeightModal}
+        setIsVisible={setShowEnterWeightModal}
       />
-      <ScrollView>
-        {renderDaysOptions()}
-        {renderExerciseList()}
-        <EnterWeightModal isVisible={showModal} setIsVisible={setShowModal} />
-      </ScrollView>
-    </>
+      <WithoutRoutineModal
+        isVisible={showWithoutRoutineModal}
+        setIsVisible={setShowWithoutRoutineModal}
+      />
+    </ScrollView>
   );
 };
 

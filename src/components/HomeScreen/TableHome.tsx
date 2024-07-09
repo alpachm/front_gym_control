@@ -81,9 +81,11 @@ const TableHome = (props: Props) => {
               </Text>
             </Pressable>
           ) : (
-            <Text style={{ ...styles.weight, color: setCurrectWeightColr() }}>
-              {`${props.exercise.current_weight} kg`}
-            </Text>
+            <View>
+              <Text style={{ ...styles.weight, color: setCurrectWeightColr() }}>
+                {`${props.exercise.current_weight} kg`}
+              </Text>
+            </View>
           )}
         </View>
       </View>
