@@ -3,6 +3,7 @@ export default interface ExerciseEntity {
     name: string; 
     reps: number;
     last_weight: number;
+    current_weight: number;
     img_url: string;
     completed: boolean;
 }

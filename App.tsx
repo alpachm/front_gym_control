@@ -15,6 +15,7 @@ import {
 import * as SplashScreen from 'expo-splash-screen';
 import { useFonts } from 'expo-font';
 import { StatusBar } from 'react-native';
+import { UserContextProvider } from './src/context/userContext';
 
 export default function App() {
   const [loadedFonts] = useFonts({
@@ -47,9 +48,11 @@ export default function App() {
         barStyle={'default'}
       />
       <ThemeContextProvider>
-        <NavigationContainer>
-          <StackNavigator />
-        </NavigationContainer>
+        <UserContextProvider>
+          <NavigationContainer>
+            <StackNavigator />
+          </NavigationContainer>
+        </UserContextProvider>
       </ThemeContextProvider>
     </>
   );

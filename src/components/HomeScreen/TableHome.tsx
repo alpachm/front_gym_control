@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useContext, useState } from 'react';
+import React, { Dispatch, SetStateAction, useContext } from 'react';
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import ExerciseEntity from '../../entities/exercise.entity';
 import { ThemeContext } from '../../context/themeContext';
@@ -7,6 +7,7 @@ import IconInfo from '../../icons/IconInfo';
 import IconEdit from '../../icons/IconEdit';
 import IconCheck from '../../icons/IconCheck';
 import { toCapitalize } from '../../utils/formatText';
+import { UserContext } from '../../context/userContext';
 
 interface Props {
   exercise: ExerciseEntity;
@@ -14,9 +15,19 @@ interface Props {
 }
 
 const TableHome = (props: Props) => {
+  const { setSelectedExerciseId } = useContext(UserContext);
   const { theme } = useContext(ThemeContext);
   const { t } = useTranslation();
-  const [currentWeight, setCurrentWeight] = useState(0);
+
+  const setCurrectWeightColr = () => {
+    if (props.exercise.current_weight > props.exercise.last_weight) {
+      return theme.blue;
+    } else if (props.exercise.current_weight < props.exercise.last_weight) {
+      return theme.red;
+    } else {
+      return theme.text_color;
+    }
+  };
 
   const renderHeader = () => {
     return (
@@ -49,24 +60,31 @@ const TableHome = (props: Props) => {
           <Text style={{ ...styles.subtitle, color: theme.text_color }}>
             {t('HomeScreen:Current_Weight')}
           </Text>
-          <Pressable
-            style={({ pressed }) => [
-              {
-                ...styles.buttonEnter,
-                borderColor: theme.text_color,
-                opacity: pressed ? 0.5 : 1,
-              },
-            ]}
-            onPress={() => {
-              props.setShowModal(true);
-            }}
-          >
-            <Text
-              style={{ ...styles.buttonEnterText, color: theme.text_color }}
+          {!props.exercise.current_weight ? (
+            <Pressable
+              style={({ pressed }) => [
+                {
+                  ...styles.buttonEnter,
+                  borderColor: theme.text_color,
+                  opacity: pressed ? 0.5 : 1,
+                },
+              ]}
+              onPress={() => {
+                props.setShowModal(true);
+                setSelectedExerciseId(props.exercise.id);
+              }}
             >
-              {t('HomeScreen:Enter_Weight')}
+              <Text
+                style={{ ...styles.buttonEnterText, color: theme.text_color }}
+              >
+                {t('HomeScreen:Enter_Weight')}
+              </Text>
+            </Pressable>
+          ) : (
+            <Text style={{ ...styles.weight, color: setCurrectWeightColr() }}>
+              {`${props.exercise.current_weight} kg`}
             </Text>
-          </Pressable>
+          )}
         </View>
       </View>
     );

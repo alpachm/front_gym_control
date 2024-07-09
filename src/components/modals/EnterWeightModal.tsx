@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useContext } from 'react';
+import React, { Dispatch, SetStateAction, useContext, useRef } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import ReactNativeModal from 'react-native-modal';
 import { ThemeContext } from '../../context/themeContext';
@@ -6,27 +6,37 @@ import ModalButton from '../shared/ModalButton';
 import { useTranslation } from 'react-i18next';
 import SelectDropdown from 'react-native-select-dropdown';
 import IconDownArrow from '../../icons/IconDownArrow';
+import { UserContext } from '../../context/userContext';
+import exerciseData from '../../utils/exercises.data';
 
 interface Props {
   isVisible: boolean;
   setIsVisible: Dispatch<SetStateAction<boolean>>;
+  exercise_id?: number;
 }
 
 const EnterWeightModal = (props: Props) => {
+  const { selectedExerciseId } = useContext(UserContext);
   const { theme } = useContext(ThemeContext);
   const { t } = useTranslation();
+  const currentWeight = useRef(0);
 
   const data = [{ title: 'kg' }, { title: 'lb' }];
+
+  const handleEnter = () => {
+    exerciseData.map((exercise) => {
+      if (exercise.id === selectedExerciseId) {
+        exercise.current_weight = currentWeight.current;
+      }
+      return exercise;
+    });
+    props.setIsVisible(false);
+  };
 
   const renderButtons = () => {
     return (
       <View style={styles.buttonsContainer}>
-        <ModalButton
-          label="Enter"
-          onPress={() => {
-            props.setIsVisible(false);
-          }}
-        />
+        <ModalButton label="Enter" onPress={handleEnter} />
         <ModalButton
           label="Cancel"
           onPress={() => {
@@ -45,6 +55,9 @@ const EnterWeightModal = (props: Props) => {
             ...styles.input,
             borderColor: theme.text_color,
             color: theme.text_color,
+          }}
+          onChangeText={(value) => {
+            currentWeight.current = +value;
           }}
           placeholder={t('Modal:Enter_Weight')}
           placeholderTextColor={theme.text_color}
@@ -119,11 +132,11 @@ export default EnterWeightModal;
 
 const styles = StyleSheet.create({
   modal: {
-    height: '30%',
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
     gap: 20,
+    paddingVertical: 20,
   },
   container: {
     width: '80%',
