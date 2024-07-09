@@ -50,6 +50,10 @@
         "Current_Weight": "Current weight",
         "Enter_Weight": "Enter"
     },
+    "RoutineScreen": {
+        "Title": "Routines",
+        "Create_Routine": "Create routine"
+      },
     "Days": {
         "Monday": "Monday",
         "Tuesday": "Tuesday",
