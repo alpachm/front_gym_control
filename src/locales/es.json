@@ -54,6 +54,14 @@
       "Title": "Rutinas",
       "Create_Routine": "Crear rutina"
     },
+    "CreateRoutineScreen": {
+        "Title": "Crea tu rutina, organizate y avanza",
+        "Add_Exercise": "Agregar ejercicio",
+        "Create_Exercise": "Crear ejercicio",
+        "Create_Routine": "Crear rutina",
+        "Enter_Routine_Day": "Ingresa día de rutina",
+        "Enter_Routine_Name": "Ingresa nombre de rutina"
+    },
     "Days": {
         "Monday": "Lunes",
         "Tuesday": "Martes",

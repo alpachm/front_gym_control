@@ -10,10 +10,13 @@ import routineData from "../../utils/routines.data";
 import IconEdit from "../../icons/IconEdit";
 import IconDelete from "../../icons/IconDelete";
 import { toCapitalize } from "../../utils/formatText";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { RootAppStackParams } from "../../navigation/AppStackNavigator";
 
 const RoutineScreen = () => {
     const { t } = useTranslation();
     const { theme } = useContext(ThemeContext);
+    const navigation = useNavigation<NavigationProp<RootAppStackParams>>();
 
     const renderRoutines = () => {
         return (
@@ -88,7 +91,7 @@ const RoutineScreen = () => {
                     iconHeight={20}
                     width={170}
                     height={50}
-                    onPress={() => {}}
+                    onPress={() => navigation.navigate("CreateRoutine")}
                 />
                 {renderRoutines()}
             </View>

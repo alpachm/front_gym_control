@@ -54,6 +54,14 @@
         "Title": "Routines",
         "Create_Routine": "Create routine"
       },
+      "CreateRoutineScreen": {
+        "Title": "Create your routine, organize and move forward",
+        "Add_Exercise": "Add exercise",
+        "Create_Exercise": "Create exercise",
+        "Create_Routine": "Create routine",
+        "Enter_Routine_Day": "Enter routine day",
+        "Enter_Routine_Name": "Enter routine name"
+    },
     "Days": {
         "Monday": "Monday",
         "Tuesday": "Tuesday",
