@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import PrincipalLayout from "../../PrincipalLayout";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import Title from "../../components/shared/Title";
@@ -7,10 +7,12 @@ import { ThemeContext } from "../../context/themeContext";
 import SelectDropdown from "react-native-select-dropdown";
 import IconDownArrow from "../../icons/IconDownArrow";
 import { TextInput } from "react-native-gesture-handler";
+import ListExerciseModal from "../../components/modals/ListExerciseModal";
 
 const CreateRoutineScreen = () => {
     const { t } = useTranslation();
     const { theme } = useContext(ThemeContext);
+    const [showAddExerciseModal, setShowAddExerciseModal] = useState(false);
 
     const data = [
         {
@@ -120,9 +122,14 @@ const CreateRoutineScreen = () => {
         );
     };
 
-    const renderButton = (label: string, success?: boolean) => {
+    const renderButton = (
+        label: string,
+        onPress: () => void,
+        success?: boolean
+    ) => {
         return (
             <Pressable
+                onPress={onPress}
                 style={({ pressed }) => [
                     {
                         ...styles.button,
@@ -139,23 +146,41 @@ const CreateRoutineScreen = () => {
     };
 
     return (
-        <PrincipalLayout status="Other" backButton>
-            <View style={styles.container}>
-                <View style={{ gap: 50 }}>
-                    <Title color={theme.text_color}>
-                        {t("CreateRoutineScreen:Title")}
-                    </Title>
-                    <View style={styles.contentContainer}>
-                        <View>{renderSelectDropdown()}</View>
-                        <View>{renderTextInput()}</View>
-                        {renderButton(t("CreateRoutineScreen:Add_Exercise"))}
-                        {renderButton(t("CreateRoutineScreen:Create_Exercise"))}
+        <>
+            <PrincipalLayout status="Other" backButton>
+                <View style={styles.container}>
+                    <View style={{ gap: 50 }}>
+                        <Title color={theme.text_color}>
+                            {t("CreateRoutineScreen:Title")}
+                        </Title>
+                        <View style={styles.contentContainer}>
+                            <View>{renderSelectDropdown()}</View>
+                            <View>{renderTextInput()}</View>
+                            {renderButton(
+                                t("CreateRoutineScreen:Add_Exercise"),
+                                () => {
+                                    setShowAddExerciseModal(true);
+                                }
+                            )}
+                            {renderButton(
+                                t("CreateRoutineScreen:Create_Exercise"),
+                                () => {}
+                            )}
+                        </View>
                     </View>
-                </View>
 
-                {renderButton(t("CreateRoutineScreen:Create_Routine"), true)}
-            </View>
-        </PrincipalLayout>
+                    {renderButton(
+                        t("CreateRoutineScreen:Create_Routine"),
+                        () => {},
+                        true
+                    )}
+                </View>
+            </PrincipalLayout>
+            <ListExerciseModal
+                isVisible={showAddExerciseModal}
+                setIsVisible={setShowAddExerciseModal}
+            />
+        </>
     );
 };
 

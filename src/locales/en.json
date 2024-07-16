@@ -77,6 +77,7 @@
         "Enter": "Enter",
         "Cancel": "Cancel",
         "Unit": "Unit",
-        "Without_Routine": "You still don't have a routine assigned for this day. Do you want to assign one?"
+        "Without_Routine": "You still don't have a routine assigned for this day. Do you want to assign one?",
+        "Add_Exercise": "Add exercise"
     }
 }

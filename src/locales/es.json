@@ -77,6 +77,7 @@
         "Enter": "Ingresar",
         "Cancel": "Cancelar",
         "Unit": "Unidad",
-        "Without_Routine": "Aún no tienes rutina asignada para este día ¿Deseas asignar una?"
+        "Without_Routine": "Aún no tienes rutina asignada para este día ¿Deseas asignar una?",
+        "Add_Exercise": "Agregar ejercicio"
     }
 }
