@@ -91,7 +91,7 @@ const RoutineScreen = () => {
                     iconHeight={20}
                     width={170}
                     height={50}
-                    onPress={() => navigation.navigate("CreateRoutine")}
+                    onPress={() => navigation.navigate("CreateRoutine", {})}
                 />
                 {renderRoutines()}
             </View>

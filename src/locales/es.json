@@ -66,6 +66,17 @@
         "Exercises": "Ejercicios",
         "Create_Exercise": "Crear ejercicio"
     },
+    "CreateExerciseScreen": {
+        "Title": "Crea tu ejercicio, entrena y triunfa",
+        "Enter_Name": "Ingresa el nombre",
+        "Enter_Weight": "Ingresa el peso",
+        "Enter_Reps": "Ingresa número de repeticiones",
+        "Slect_Routine": "Selecciona la rutina",
+        "Add_Image": "Ingresa una imagen del ejercicio",
+        "Optional": "Opcional",
+        "Create_Exercise": "Crear ejercicio",
+        "Create_Routine": "Crear rutina"
+    },
     "Days": {
         "Monday": "Lunes",
         "Tuesday": "Martes",

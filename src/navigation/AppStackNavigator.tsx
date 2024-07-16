@@ -3,12 +3,14 @@ import HomeScreen from "../screens/Home/HomeScreen";
 import RoutineScreen from "../screens/Routine/RoutineScreen";
 import ExerciseScreen from "../screens/Exercise/ExerciseScreen";
 import CreateRoutineScreen from "../screens/Routine/CreateRoutineScreen";
+import CreateExerciseScreen from "../screens/Exercise/CreateExerciseScreen";
 
 export type RootAppStackParams = {
     Home: undefined;
     Routine: undefined;
     Exercise: undefined;
-    CreateRoutine: undefined;
+    CreateRoutine: { routineId?: number };
+    CreateExercise: { exerciseId?: number };
 };
 
 const Stack = createStackNavigator<RootAppStackParams>();
@@ -27,6 +29,10 @@ function AppStackNavigator() {
                 component={CreateRoutineScreen}
             />
             <Stack.Screen name="Exercise" component={ExerciseScreen} />
+            <Stack.Screen
+                name="CreateExercise"
+                component={CreateExerciseScreen}
+            />
         </Stack.Navigator>
     );
 }

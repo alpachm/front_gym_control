@@ -62,6 +62,21 @@
         "Enter_Routine_Day": "Enter routine day",
         "Enter_Routine_Name": "Enter routine name"
     },
+    "ExerciseScreen": {
+        "Exercises": "Exercises",
+        "Create_Exercise": "Create exercise"
+    },
+    "CreateExerciseScreen": {
+        "Title": "Crea tu ejercicio, entrena y triunfa",
+        "Enter_Name": "Enter the name",
+        "Enter_Weight": "Enter the weight",
+        "Enter_Reps": "Enter number of repetitions",
+        "Slect_Routine": "Select the routine",
+        "Add_Image": "Enter an image of the exercise",
+        "Optional": "Optional",
+        "Create_Exercise": "Create exercise",
+        "Create_Routine": "Create routine"
+    },
     "Days": {
         "Monday": "Monday",
         "Tuesday": "Tuesday",

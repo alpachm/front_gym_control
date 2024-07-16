@@ -8,6 +8,8 @@ import SelectDropdown from "react-native-select-dropdown";
 import IconDownArrow from "../../icons/IconDownArrow";
 import { TextInput } from "react-native-gesture-handler";
 import ListExerciseModal from "../../components/modals/ListExerciseModal";
+import GenericInput from "../../components/shared/GenericInput";
+import GenericSelect from "../../components/shared/GenericSelect";
 
 const CreateRoutineScreen = () => {
     const { t } = useTranslation();
@@ -45,83 +47,6 @@ const CreateRoutineScreen = () => {
         },
     ];
 
-    const renderSelectDropdown = () => {
-        return (
-            <SelectDropdown
-                data={data}
-                onSelect={(selectedItem, index) => {
-                    console.log(selectedItem, index);
-                }}
-                renderButton={(selectedItem, isOpened) => {
-                    return (
-                        <View
-                            style={{
-                                ...styles.unitsContainer,
-                                ...styles.input,
-                                borderColor: theme.text_color,
-                                backgroundColor: theme.bg_modal,
-                            }}
-                        >
-                            <Text
-                                style={{
-                                    color: theme.text_color,
-                                }}
-                            >
-                                {(selectedItem && selectedItem.title) ||
-                                    t("CreateRoutineScreen:Enter_Routine_Day")}
-                            </Text>
-                            <IconDownArrow
-                                width={11}
-                                height={11}
-                                fill={theme.text_color}
-                            />
-                        </View>
-                    );
-                }}
-                renderItem={(item, index, isSelected) => {
-                    return (
-                        <View
-                            style={{
-                                ...styles.dropdownItemStyle,
-                                ...(isSelected && {
-                                    backgroundColor: theme.primary,
-                                }),
-                                backgroundColor: theme.bg_modal,
-                            }}
-                        >
-                            <Text
-                                style={{
-                                    ...styles.dropdownItemTxtStyle,
-                                    color: theme.text_color,
-                                }}
-                            >
-                                {item.title}
-                            </Text>
-                        </View>
-                    );
-                }}
-                showsVerticalScrollIndicator={false}
-            />
-        );
-    };
-
-    const renderTextInput = () => {
-        return (
-            <TextInput
-                style={{
-                    ...styles.input,
-                    backgroundColor: theme.bg_modal,
-                    borderColor: theme.text_color,
-                    color: theme.text_color,
-                }}
-                placeholder={t("CreateRoutineScreen:Enter_Routine_Name")}
-                placeholderTextColor={theme.text_color}
-                cursorColor={theme.primary}
-                selectionColor={theme.primary}
-            />
-        );
-    };
-
     const renderButton = (
         label: string,
         onPress: () => void,
@@ -154,8 +79,22 @@ const CreateRoutineScreen = () => {
                             {t("CreateRoutineScreen:Title")}
                         </Title>
                         <View style={styles.contentContainer}>
-                            <View>{renderSelectDropdown()}</View>
-                            <View>{renderTextInput()}</View>
+                            <View>
+                                <GenericSelect
+                                    placeholder={t(
+                                        "CreateRoutineScreen:Enter_Routine_Day"
+                                    )}
+                                    data={data}
+                                />
+                            </View>
+                            <View>
+                                <GenericInput
+                                    placeholder={t(
+                                        "CreateRoutineScreen:Enter_Routine_Name"
+                                    )}
+                                    onChange={() => {}}
+                                />
+                            </View>
                             {renderButton(
                                 t("CreateRoutineScreen:Add_Exercise"),
                                 () => {
@@ -193,27 +132,6 @@ const styles = StyleSheet.create({
     },
     contentContainer: {
         gap: 10,
-    },
-    input: {
-        borderWidth: 0.5,
-        height: 35,
-        paddingHorizontal: 10,
-        fontFamily: "Inter_300Light",
-    },
-    unitsContainer: {
-        width: "100%",
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
-    },
-    dropdownItemStyle: {
-        width: "100%",
-        paddingHorizontal: 12,
-        paddingVertical: 8,
-    },
-    dropdownItemTxtStyle: {
-        fontFamily: "Inter_300Light",
-        fontSize: 17,
     },
     button: {
         padding: 15,

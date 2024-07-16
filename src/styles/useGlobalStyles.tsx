@@ -14,7 +14,6 @@ const useGlobalStyles = () => {
             backgroundColor: theme.bg_color,
         },
         title: {
-            maxWidth: "70%",
             fontFamily: "Inter_900Black",
             fontSize: 30,
             textTransform: "uppercase",

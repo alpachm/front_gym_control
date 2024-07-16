@@ -8,10 +8,13 @@ import Button from "../../components/shared/Button";
 import IconPlus from "../../icons/IconPlus";
 import exerciseData from "../../utils/exercises.data";
 import ExerciseCard from "../../components/ExerciseScreen/ExerciseCard";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { RootAppStackParams } from "../../navigation/AppStackNavigator";
 
 const ExerciseScreen = () => {
     const { t } = useTranslation();
     const { theme } = useContext(ThemeContext);
+    const navigation = useNavigation<NavigationProp<RootAppStackParams>>();
 
     return (
         <PrincipalLayout status="Other" backButton>
@@ -27,7 +30,9 @@ const ExerciseScreen = () => {
                         iconHeight={20}
                         width={190}
                         height={50}
-                        onPress={() => {}}
+                        onPress={() => {
+                            navigation.navigate("CreateExercise", {});
+                        }}
                     />
                 </View>
 
@@ -50,7 +55,7 @@ export default ExerciseScreen;
 
 const styles = StyleSheet.create({
     container: {
-        paddingBottom: 155,
+        paddingBottom: 160,
     },
     headerContainer: {
         gap: 20,
