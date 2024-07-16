@@ -62,6 +62,10 @@
         "Enter_Routine_Day": "Ingresa día de rutina",
         "Enter_Routine_Name": "Ingresa nombre de rutina"
     },
+    "ExerciseScreen": {
+        "Exercises": "Ejercicios",
+        "Create_Exercise": "Crear ejercicio"
+    },
     "Days": {
         "Monday": "Lunes",
         "Tuesday": "Martes",
