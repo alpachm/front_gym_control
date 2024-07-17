@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import PrincipalLayout from "../../PrincipalLayout";
-import { StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import Title from "../../components/shared/Title";
 import { useTranslation } from "react-i18next";
 import { ThemeContext } from "../../context/themeContext";
@@ -8,6 +8,7 @@ import GenericInput from "../../components/shared/GenericInput";
 import GenericSelect from "../../components/shared/GenericSelect";
 import { toCapitalize } from "../../utils/formatText";
 import AddImage from "../../components/CreateExerciseScreen/AddImage";
+import GenericButton from "../../components/shared/GenericButton";
 
 const selectData = [
     {
@@ -87,7 +88,7 @@ const CreateExerciseScreen = () => {
 
     return (
         <PrincipalLayout status="Other" backButton>
-            <View>
+            <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={styles.title}>
                     <Title color={theme.text_color} maxWidth={0.8}>
                         {t("CreateExerciseScreen:Title")}
@@ -105,7 +106,7 @@ const CreateExerciseScreen = () => {
                     </View>
                     <View style={styles.inputContainer}>{selectRoutine()}</View>
                 </View>
-                <View>
+                <View style={styles.addImageConatiner}>
                     <View style={styles.addImageHeader}>
                         <Text
                             style={{
@@ -119,7 +120,12 @@ const CreateExerciseScreen = () => {
                     </View>
                     <AddImage />
                 </View>
-            </View>
+                <GenericButton
+                    label={t("CreateExerciseScreen:Create_Exercise")}
+                    onPress={() => {}}
+                    backgroundColor={theme.green}
+                />
+            </ScrollView>
         </PrincipalLayout>
     );
 };
@@ -140,6 +146,10 @@ const styles = StyleSheet.create({
     optional: {
         fontFamily: "Inter_300Light",
         fontSize: 11,
+    },
+    addImageConatiner: {
+        gap: 3,
+        marginBottom: 30,
     },
     addImageHeader: {
         flexDirection: "row",

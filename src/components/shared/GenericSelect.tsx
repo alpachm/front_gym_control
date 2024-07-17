@@ -4,6 +4,7 @@ import SelectDropdown from "react-native-select-dropdown";
 import IconDownArrow from "../../icons/IconDownArrow";
 import { ThemeContext } from "../../context/themeContext";
 import SelectEntity from "../../entities/select.entity";
+import useGlobalStyles from "../../styles/useGlobalStyles";
 
 interface Props {
     placeholder: string;
@@ -12,6 +13,7 @@ interface Props {
 
 const GenericSelect = (props: Props) => {
     const { theme } = useContext(ThemeContext);
+    const { input } = useGlobalStyles();
 
     return (
         <SelectDropdown
@@ -24,7 +26,7 @@ const GenericSelect = (props: Props) => {
                     <View
                         style={{
                             ...styles.unitsContainer,
-                            ...styles.input,
+                            ...input,
                             borderColor: theme.text_color,
                             backgroundColor: theme.bg_modal,
                         }}
@@ -80,12 +82,6 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-    },
-    input: {
-        borderWidth: 0.5,
-        height: 35,
-        paddingHorizontal: 10,
-        fontFamily: "Inter_300Light",
     },
     dropdownItemStyle: {
         width: "100%",

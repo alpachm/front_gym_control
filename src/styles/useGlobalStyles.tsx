@@ -34,6 +34,12 @@ const useGlobalStyles = () => {
             color: theme.white,
             textTransform: "lowercase",
         },
+        input: {
+            borderWidth: 0.2,
+            height: 45,
+            paddingHorizontal: 10,
+            fontFamily: "Inter_300Light",
+        },
     });
 
     return global_styles;

@@ -3,7 +3,6 @@ import {
     ScrollView,
     StatusBar,
     StyleSheet,
-    Text,
     useWindowDimensions,
     View,
 } from "react-native";
@@ -11,7 +10,8 @@ import LayoutModal from "./LayoutModal";
 import { ThemeContext } from "../../context/themeContext";
 import exerciseData from "../../utils/exercises.data";
 import AddExerciseCard from "../CreateRoutineScreen/AddExerciseCard";
-import ModalButton from "../shared/ModalButton";
+import GenericButton from "../shared/GenericButton";
+import { useTranslation } from "react-i18next";
 
 interface Props {
     isVisible: boolean;
@@ -19,6 +19,7 @@ interface Props {
 }
 
 const ListExerciseModal = (props: Props) => {
+    const { t } = useTranslation();
     const { theme } = useContext(ThemeContext);
     const { width, height } = useWindowDimensions();
 
@@ -52,19 +53,19 @@ const ListExerciseModal = (props: Props) => {
                     </View>
 
                     <View style={styles.buttonsContainer}>
-                        <ModalButton
-                            label="Add_Exercise"
+                        <GenericButton
+                            label={t("Modal:Add_Exercise")}
+                            backgroundColor={theme.green}
                             onPress={() => {
                                 props.setIsVisible(false);
                             }}
-                            isAddExerciseModal
                         />
-                        <ModalButton
-                            label="Cancel"
+                        <GenericButton
+                            label={t("Modal:Cancel")}
+                            backgroundColor={theme.red}
                             onPress={() => {
                                 props.setIsVisible(false);
                             }}
-                            isAddExerciseModal
                         />
                     </View>
                     <View></View>

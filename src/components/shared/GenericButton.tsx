@@ -1,47 +1,45 @@
 import React, { useContext } from "react";
-import { useTranslation } from "react-i18next";
 import { Pressable, StyleSheet, Text } from "react-native";
 import { ThemeContext } from "../../context/themeContext";
 
 interface Props {
-    label: "Create" | "Enter" | "Cancel" | "Add_Exercise";
+    label: string;
     onPress: () => void;
+    backgroundColor: string;
 }
 
-const ModalButton = (props: Props) => {
-    const { t } = useTranslation();
+const GenericButton = (props: Props) => {
     const { theme } = useContext(ThemeContext);
 
     return (
         <Pressable
+            onPress={props.onPress}
             style={({ pressed }) => [
                 {
                     ...styles.button,
-                    backgroundColor:
-                        props.label === "Cancel" ? theme.red : theme.green,
+                    backgroundColor: props.backgroundColor,
                     opacity: pressed ? 0.5 : 1,
                 },
             ]}
-            onPress={props.onPress}
         >
-            <Text style={{ ...styles.text, color: theme.white }}>
-                {t(`Modal:${props.label}`).toLowerCase()}
+            <Text style={{ ...styles.buttonText, color: theme.white }}>
+                {props.label.toLowerCase()}
             </Text>
         </Pressable>
     );
 };
 
-export default ModalButton;
+export default GenericButton;
 
 const styles = StyleSheet.create({
     button: {
-        borderRadius: 5,
-        width: 110,
-        height: 40,
-        justifyContent: "center",
+        padding: 15,
+        borderRadius: 6,
         alignItems: "center",
+        justifyContent: "center",
     },
-    text: {
+    buttonText: {
         fontFamily: "Inter_700Bold",
+        fontSize: 15,
     },
 });

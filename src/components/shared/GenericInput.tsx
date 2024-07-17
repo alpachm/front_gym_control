@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
-import { StyleSheet, TextInput } from "react-native";
+import { TextInput } from "react-native";
 import { ThemeContext } from "../../context/themeContext";
+import useGlobalStyles from "../../styles/useGlobalStyles";
 
 interface Props {
     placeholder: string;
@@ -9,11 +10,12 @@ interface Props {
 
 const GenericInput = (props: Props) => {
     const { theme } = useContext(ThemeContext);
+    const { input } = useGlobalStyles();
 
     return (
         <TextInput
             style={{
-                ...styles.input,
+                ...input,
                 backgroundColor: theme.bg_modal,
                 borderColor: theme.text_color,
                 color: theme.text_color,
@@ -28,12 +30,3 @@ const GenericInput = (props: Props) => {
 };
 
 export default GenericInput;
-
-const styles = StyleSheet.create({
-    input: {
-        borderWidth: 0.5,
-        height: 35,
-        paddingHorizontal: 10,
-        fontFamily: "Inter_300Light",
-    },
-});

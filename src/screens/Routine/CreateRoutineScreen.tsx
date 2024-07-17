@@ -1,19 +1,20 @@
 import React, { useContext, useState } from "react";
 import PrincipalLayout from "../../PrincipalLayout";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import Title from "../../components/shared/Title";
 import { useTranslation } from "react-i18next";
 import { ThemeContext } from "../../context/themeContext";
-import SelectDropdown from "react-native-select-dropdown";
-import IconDownArrow from "../../icons/IconDownArrow";
-import { TextInput } from "react-native-gesture-handler";
 import ListExerciseModal from "../../components/modals/ListExerciseModal";
 import GenericInput from "../../components/shared/GenericInput";
 import GenericSelect from "../../components/shared/GenericSelect";
+import GenericButton from "../../components/shared/GenericButton";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { RootAppStackParams } from "../../navigation/AppStackNavigator";
 
 const CreateRoutineScreen = () => {
     const { t } = useTranslation();
     const { theme } = useContext(ThemeContext);
+    const navigation = useNavigation<NavigationProp<RootAppStackParams>>();
     const [showAddExerciseModal, setShowAddExerciseModal] = useState(false);
 
     const data = [
@@ -47,29 +48,6 @@ const CreateRoutineScreen = () => {
         },
     ];
 
-    const renderButton = (
-        label: string,
-        onPress: () => void,
-        success?: boolean
-    ) => {
-        return (
-            <Pressable
-                onPress={onPress}
-                style={({ pressed }) => [
-                    {
-                        ...styles.button,
-                        backgroundColor: success ? theme.green : theme.primary,
-                        opacity: pressed ? 0.5 : 1,
-                    },
-                ]}
-            >
-                <Text style={{ ...styles.buttonText, color: theme.white }}>
-                    {label.toLowerCase()}
-                </Text>
-            </Pressable>
-        );
-    };
-
     return (
         <>
             <PrincipalLayout status="Other" backButton>
@@ -95,24 +73,28 @@ const CreateRoutineScreen = () => {
                                     onChange={() => {}}
                                 />
                             </View>
-                            {renderButton(
-                                t("CreateRoutineScreen:Add_Exercise"),
-                                () => {
+                            <GenericButton
+                                label={t("CreateRoutineScreen:Add_Exercise")}
+                                backgroundColor={theme.primary}
+                                onPress={() => {
                                     setShowAddExerciseModal(true);
-                                }
-                            )}
-                            {renderButton(
-                                t("CreateRoutineScreen:Create_Exercise"),
-                                () => {}
-                            )}
+                                }}
+                            />
+                            <GenericButton
+                                label={t("CreateRoutineScreen:Create_Exercise")}
+                                backgroundColor={theme.primary}
+                                onPress={() => {
+                                    navigation.navigate("CreateExercise", {});
+                                }}
+                            />
                         </View>
                     </View>
 
-                    {renderButton(
-                        t("CreateRoutineScreen:Create_Routine"),
-                        () => {},
-                        true
-                    )}
+                    <GenericButton
+                        label={t("CreateRoutineScreen:Create_Routine")}
+                        backgroundColor={theme.green}
+                        onPress={() => {}}
+                    />
                 </View>
             </PrincipalLayout>
             <ListExerciseModal
@@ -132,15 +114,5 @@ const styles = StyleSheet.create({
     },
     contentContainer: {
         gap: 10,
-    },
-    button: {
-        padding: 15,
-        borderRadius: 6,
-        alignItems: "center",
-        justifyContent: "center",
-    },
-    buttonText: {
-        fontFamily: "Inter_700Bold",
-        fontSize: 15,
     },
 });
