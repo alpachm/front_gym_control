@@ -1,14 +1,28 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import PrincipalLayout from "../../PrincipalLayout";
 import { useTranslation } from "react-i18next";
 import ProfileSelect from "../../components/ProfileScreen/ProfileSelect";
 import { ThemeContext } from "../../context/themeContext";
 import { toCapitalize } from "../../utils/formatText";
+import {
+    languageOptions,
+    measurementSystemOptions,
+    themeOptions,
+} from "../../utils/profileOptions";
+import IconLogout from "../../icons/IconLogout";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { RootStackParams } from "../../navigation/StackNavigator";
 
 const ProfileScreen = () => {
     const { t } = useTranslation();
     const { theme } = useContext(ThemeContext);
+    const navigation = useNavigation<NavigationProp<RootStackParams>>();
+
+    const [isSwithEnable, setIsSwithEnable] = useState(false);
+
+    const toggleSwitch = () =>
+        setIsSwithEnable((previousState) => !previousState);
 
     const renderLabel = (label: string) => {
         return (
@@ -22,7 +36,7 @@ const ProfileScreen = () => {
         return (
             <View>
                 {renderLabel(t("Actions:Select_Language"))}
-                <ProfileSelect />
+                <ProfileSelect data={languageOptions} />
             </View>
         );
     };
@@ -31,7 +45,7 @@ const ProfileScreen = () => {
         return (
             <View>
                 {renderLabel(t("Actions:Select_Measurement_System"))}
-                <ProfileSelect />
+                <ProfileSelect data={measurementSystemOptions} />
             </View>
         );
     };
@@ -40,7 +54,7 @@ const ProfileScreen = () => {
         return (
             <View>
                 {renderLabel(t("Actions:Select_Theme"))}
-                <ProfileSelect />
+                <ProfileSelect data={themeOptions} isThemeSelect />
             </View>
         );
     };
@@ -73,14 +87,26 @@ const ProfileScreen = () => {
                         </Text>
                     </View>
 
-                    <View>
+                    <View style={styles.selectOptionsContainer}>
                         <View>{renderLanguageOptions()}</View>
                         <View>{renderMeasuringSystemOptions()}</View>
                         <View>{renderThemeOptions()}</View>
                     </View>
                 </View>
-                <Pressable style={({ pressed }) => [{}]}>
-                    <Text>{t("Actions:Logout")}</Text>
+                <Pressable
+                    style={({ pressed }) => [
+                        {
+                            ...styles.logoutButton,
+                            backgroundColor: theme.red,
+                            opacity: pressed ? 0.5 : 1,
+                        },
+                    ]}
+                    onPress={() => navigation.navigate("Start")}
+                >
+                    <IconLogout width={25} height={25} fill={theme.white} />
+                    <Text style={{ ...styles.buttonTxt, color: theme.white }}>
+                        {t("Actions:Logout")}
+                    </Text>
                 </Pressable>
             </View>
         </PrincipalLayout>
@@ -122,5 +148,22 @@ const styles = StyleSheet.create({
     label: {
         fontFamily: "Inter_200ExtraLight",
         fontSize: 13,
+    },
+    selectOptionsContainer: {
+        gap: 15,
+    },
+    logoutButton: {
+        width: "100%",
+        height: 70,
+        borderRadius: 10,
+        flexDirection: "row",
+        justifyContent: "flex-start",
+        alignItems: "center",
+        gap: 20,
+        paddingHorizontal: 15,
+    },
+    buttonTxt: {
+        fontFamily: "Inter_600SemiBold",
+        fontSize: 18,
     },
 });

@@ -12,7 +12,9 @@
         "Register": "Registrarme",
         "Select_Language": "Selecciona el lenguaje",
         "Select_Measurement_System": "Selecciona el sistema de medición",
-        "Select_Theme": "Selecciona el tema"
+        "Select_Theme": "Selecciona el tema",
+        "Activated": "Activado",
+        "Desactivated": "Desactivado"
     },
     "StartScreen": {
         "Title": "Potencializa tu progreso",
@@ -94,5 +96,13 @@
         "Unit": "Unidad",
         "Without_Routine": "Aún no tienes rutina asignada para este día ¿Deseas asignar una?",
         "Add_Exercise": "Agregar ejercicio"
+    },
+    "Languages": {
+        "English": "Inglés",
+        "Spanish": "Español"
+    },
+    "MeasurementSystem": {
+        "Kilograms": "Kilogramos",
+        "Libras": "Libras"
     }
 }

@@ -11,7 +11,9 @@
         "Register": "Register",
         "Select_Language": "Select the language",
         "Select_Measurement_System": "Select the measurement system",
-        "Select_Theme": "Select the theme"
+        "Select_Theme": "Select the theme",
+        "Activated": "Activated",
+        "Desactivated": "Desactivated"
     },
     "StartScreen": {
         "Title": "Boost your progress",
@@ -94,5 +96,13 @@
         "Unit": "Unit",
         "Without_Routine": "You still don't have a routine assigned for this day. Do you want to assign one?",
         "Add_Exercise": "Add exercise"
+    },
+    "Languages": {
+        "English": "English",
+        "Spanish": "Spanish"
+    },
+    "MeasurementSystem": {
+        "Kilograms": "Kilograms",
+        "Libras": "Libras"
     }
 }

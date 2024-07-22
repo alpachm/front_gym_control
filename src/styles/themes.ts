@@ -12,7 +12,9 @@ export interface ITheme {
     green: string;
     red: string;
     blue: string;
-    black: string
+    black: string;
+    switch_actived_color: string;
+    switch_desactived_color: string;
 }
 
 export const light_theme: ITheme = {
@@ -29,7 +31,9 @@ export const light_theme: ITheme = {
     green: "#80DC4B",
     red: "#C70D3A",
     blue: "#5484FF",
-    black: "#0C0C0C"
+    black: "#0C0C0C",
+    switch_actived_color: "#96C9F4",
+    switch_desactived_color: "#C3C3C3"
 };
 
 export const dark_theme: ITheme = {
@@ -46,5 +50,7 @@ export const dark_theme: ITheme = {
     green: "#02383C",
     red: "#C70D3A",
     blue: "#5484FF",
-    black: "#0C0C0C"
+    black: "#0C0C0C",
+    switch_actived_color: "#96C9F4",
+    switch_desactived_color: "#C3C3C3"
 };
