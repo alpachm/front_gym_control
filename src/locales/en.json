@@ -104,5 +104,9 @@
     "MeasurementSystem": {
         "Kilograms": "Kilograms",
         "Libras": "Libras"
+    },
+    "TabBar": {
+        "Home": "Home",
+        "Profile": "Profile"
     }
 }
