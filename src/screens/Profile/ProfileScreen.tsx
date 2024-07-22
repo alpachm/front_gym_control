@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import PrincipalLayout from "../../PrincipalLayout";
 import { useTranslation } from "react-i18next";
@@ -13,16 +13,20 @@ import {
 import IconLogout from "../../icons/IconLogout";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { RootStackParams } from "../../navigation/StackNavigator";
+import LoadingScreen from "../../components/shared/LoadingScreen";
 
 const ProfileScreen = () => {
     const { t } = useTranslation();
     const { theme } = useContext(ThemeContext);
     const navigation = useNavigation<NavigationProp<RootStackParams>>();
 
-    const [isSwithEnable, setIsSwithEnable] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
-    const toggleSwitch = () =>
-        setIsSwithEnable((previousState) => !previousState);
+    useEffect(() => {
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 1000);
+    }, []);
 
     const renderLabel = (label: string) => {
         return (
@@ -58,6 +62,14 @@ const ProfileScreen = () => {
             </View>
         );
     };
+
+    if (isLoading) {
+        return (
+            <PrincipalLayout status="Other">
+                <LoadingScreen isLoading={isLoading} />
+            </PrincipalLayout>
+        );
+    }
 
     return (
         <PrincipalLayout status="Other" backButton>

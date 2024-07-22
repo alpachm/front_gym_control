@@ -4,6 +4,7 @@ import { ThemeContext } from "../../context/themeContext";
 import IconRightArrow from "../../icons/IconRightArrow";
 import { toCapitalize } from "../../utils/formatText";
 import SelectEntity from "../../entities/select.entity";
+import { useTranslation } from "react-i18next";
 
 interface Props {
     data: SelectEntity[];
@@ -12,6 +13,8 @@ interface Props {
 
 const ProfileSelect = (props: Props) => {
     const { theme } = useContext(ThemeContext);
+    const { t } = useTranslation();
+
     const [isSwithEnable, setIsSwithEnable] = useState(false);
 
     const toggleSwitch = () =>
@@ -26,7 +29,7 @@ const ProfileSelect = (props: Props) => {
                         style={styles.image}
                     />
                     <Text style={{ ...styles.text, color: theme.text_color }}>
-                        {toCapitalize(props.data[1].title)}
+                        {toCapitalize(t(props.data[1].title))}
                     </Text>
                 </View>
                 <IconRightArrow
@@ -47,7 +50,7 @@ const ProfileSelect = (props: Props) => {
                         style={styles.image}
                     />
                     <Text style={{ ...styles.text, color: theme.text_color }}>
-                        {toCapitalize(props.data[1].title)}
+                        {toCapitalize(t(props.data[1].title))}
                     </Text>
                 </View>
                 <Switch
