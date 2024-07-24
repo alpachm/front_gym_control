@@ -11,6 +11,7 @@ export interface ITheme {
     light_green: string;
     green: string;
     red: string;
+    red_error: string;
     blue: string;
     black: string;
     switch_actived_color: string;
@@ -30,6 +31,7 @@ export const light_theme: ITheme = {
     light_green: "#ADD899",
     green: "#80DC4B",
     red: "#C70D3A",
+    red_error: "#EE4E4E",
     blue: "#5484FF",
     black: "#0C0C0C",
     switch_actived_color: "#96C9F4",
@@ -49,6 +51,7 @@ export const dark_theme: ITheme = {
     light_green: "#ADD899",
     green: "#02383C",
     red: "#C70D3A",
+    red_error: "#EE4E4E",
     blue: "#5484FF",
     black: "#0C0C0C",
     switch_actived_color: "#96C9F4",

@@ -108,5 +108,9 @@
     "TabBar": {
         "Home": "Inicio",
         "Profile": "Perfil"
+    },
+    "Error": {
+        "Invalid_Email": "Ingresa un email válido",
+        "Incorrect_Password": "Las contraseñas no coinciden"
     }
 }
