@@ -8,12 +8,15 @@ import IconUser from "../../icons/IconUser";
 import IconEmail from "../../icons/IconEmail";
 import IconKey from "../../icons/IconKey";
 import EnterFooter from "../../components/shared/EnterFooter";
-import { CreateUserDataEntity } from "../../entities/services.entity";
+import { CreateUserDataEntity } from "../../entities/createUserData.entity";
 import {
     validateConfirmPassword,
     validateIfValidEmail,
 } from "../../utils/inputsValidations";
 import { ThemeContext } from "../../context/themeContext";
+import SignupService from "../../services/SignupService";
+import LoadingScreen from "../../components/shared/LoadingScreen";
+import CreatedUserModal from "../../components/modals/CreatedUserModal";
 
 const RegisterScreen = () => {
     const { t } = useTranslation();
@@ -21,12 +24,14 @@ const RegisterScreen = () => {
 
     const [isInvalidEmail, setIsInvalidEmail] = useState(false);
     const [isDifferentPassword, setIsDifferentPassword] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const formUserData = useRef<CreateUserDataEntity>({
         name: "",
         last_name: "",
         email: "",
         password: "",
+        img_url: "",
     });
     const confirmPassword = useRef<string>("");
 
@@ -38,6 +43,27 @@ const RegisterScreen = () => {
                 </Text>
             </View>
         );
+    };
+
+    const onSubmit = async () => {
+        setIsLoading(true);
+        await SignupService(formUserData.current)
+            .then((res) => {
+                console.log("res: ", res);
+            })
+            .catch((error) => {
+                console.log("Error: ", error);
+            })
+            .finally(() => {
+                setIsLoading(false);
+                formUserData.current = {
+                    name: "",
+                    last_name: "",
+                    email: "",
+                    password: "",
+                    img_url: "",
+                };
+            });
     };
 
     const renderInputs = () => {
@@ -123,22 +149,30 @@ const RegisterScreen = () => {
         );
     };
 
-    return (
-        <PrincipalLayout status="Register" backButton>
-            <View style={styles.container}>
-                <Title>{t("RegisterScreen:Title")}</Title>
+    if (isLoading) {
+        return <LoadingScreen isLoading={isLoading} />;
+    }
 
-                <View>
-                    {renderInputs()}
-                    <EnterFooter
-                        buttonLabel={t("Actions:Register")}
-                        onPress={() => {
-                            console.log("Data: ", formUserData.current);
-                        }}
-                    />
+    return (
+        <>
+            <PrincipalLayout status="Register" backButton>
+                <View style={styles.container}>
+                    <Title>{t("RegisterScreen:Title")}</Title>
+
+                    <View>
+                        {renderInputs()}
+                        <EnterFooter
+                            buttonLabel={t("Actions:Register")}
+                            onPress={async () => {
+                                await onSubmit();
+                                console.log("Data: ", formUserData.current);
+                            }}
+                        />
+                    </View>
                 </View>
-            </View>
-        </PrincipalLayout>
+            </PrincipalLayout>
+            <CreatedUserModal />
+        </>
     );
 };
 
