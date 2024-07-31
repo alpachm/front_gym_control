@@ -40,6 +40,27 @@ const useGlobalStyles = () => {
             paddingHorizontal: 10,
             fontFamily: "Inter_300Light",
         },
+        confirmModal: {
+            width: "80%",
+            borderRadius: 10,
+            padding: 20,
+            gap: 5,
+            alignItems: "center",
+            backgroundColor: theme.white,
+        },
+        iconConfirmModal: {
+            justifyContent: "center",
+            alignItems: "center",
+            height: 50,
+            width: 50,
+            borderRadius: 50,
+        },
+        txtConfirmModal: {
+            fontFamily: "Inter_400Regular",
+            fontSize: 22,
+            textAlign: "center",
+            color: theme.black,
+        },
     });
 
     return global_styles;

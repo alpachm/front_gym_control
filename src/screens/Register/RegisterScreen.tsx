@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import PrincipalLayout from "../../PrincipalLayout";
 import Title from "../../components/shared/Title";
@@ -16,7 +16,9 @@ import {
 import { ThemeContext } from "../../context/themeContext";
 import SignupService from "../../services/SignupService";
 import LoadingScreen from "../../components/shared/LoadingScreen";
-import CreatedUserModal from "../../components/modals/CreatedUserModal";
+import CreatedUserModal from "../../components/modals/UserSuccessfullyCreatedModal";
+import EApiStatusResponse from "../../enums/apiStatusRespponse.enum";
+import EModalTime from "../../enums/modalTime.enum";
 
 const RegisterScreen = () => {
     const { t } = useTranslation();
@@ -25,6 +27,22 @@ const RegisterScreen = () => {
     const [isInvalidEmail, setIsInvalidEmail] = useState(false);
     const [isDifferentPassword, setIsDifferentPassword] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [createdUserSuccesfully, setCreatedUserSuccesfully] = useState(false);
+    const [createdUserError, setCreatedUserError] = useState(false);
+
+    useEffect(() => {
+        if (createdUserSuccesfully) {
+            setTimeout(() => {
+                setCreatedUserSuccesfully(false);
+            }, EModalTime.SHORT);
+        }
+
+        if (createdUserError) {
+            setTimeout(() => {
+                setCreatedUserError(false);
+            }, EModalTime.SHORT);
+        }
+    }, [createdUserSuccesfully, createdUserError]);
 
     const formUserData = useRef<CreateUserDataEntity>({
         name: "",
@@ -49,7 +67,11 @@ const RegisterScreen = () => {
         setIsLoading(true);
         await SignupService(formUserData.current)
             .then((res) => {
-                console.log("res: ", res);
+                if (res.status === EApiStatusResponse.SUCCESS) {
+                    setCreatedUserSuccesfully(true);
+                } else {
+                    setCreatedUserError(true);
+                }
             })
             .catch((error) => {
                 console.log("Error: ", error);
@@ -171,7 +193,7 @@ const RegisterScreen = () => {
                     </View>
                 </View>
             </PrincipalLayout>
-            <CreatedUserModal />
+            <CreatedUserModal isVisible={createdUserSuccesfully} />
         </>
     );
 };

@@ -95,7 +95,9 @@
         "Cancel": "Cancelar",
         "Unit": "Unidad",
         "Without_Routine": "Aún no tienes rutina asignada para este día ¿Deseas asignar una?",
-        "Add_Exercise": "Agregar ejercicio"
+        "Add_Exercise": "Agregar ejercicio",
+        "Created_User": "Usuario creado exitosamente",
+        "Error_Create_User": "Error al intentar crear el usuario"
     },
     "Languages": {
         "English": "Inglés",
