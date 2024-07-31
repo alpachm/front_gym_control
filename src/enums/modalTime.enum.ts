@@ -1,5 +1,5 @@
 enum EModalTime {
-    SHORT = 1500
+    SHORT = 2500
 }
 
 export default EModalTime;

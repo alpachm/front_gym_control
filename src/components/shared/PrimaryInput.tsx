@@ -9,6 +9,7 @@ interface Props {
     onChenge: (e: string) => void;
     inputMode: "text" | "numeric" | "email";
     secureTextEntry?: boolean;
+    value?: string;
     onBlur?: () => void;
     isError?: boolean;
 }
@@ -35,8 +36,9 @@ const PrimaryInput = (props: Props) => {
                 style={{
                     ...styles.input,
                     color: theme.white,
-                    opacity: isFocused ? 1 : 0.5,
+                    opacity: props.value ? 1 : 0.5,
                 }}
+                value={props.value}
                 placeholder={props.placeholder}
                 placeholderTextColor={theme.white}
                 cursorColor={theme.primary}
@@ -46,6 +48,7 @@ const PrimaryInput = (props: Props) => {
                 inputMode={props.inputMode}
                 onFocus={() => setIsFocused(true)}
                 secureTextEntry={props.secureTextEntry}
+                autoComplete="off"
             />
         </View>
     );

@@ -16,9 +16,10 @@ import {
 import { ThemeContext } from "../../context/themeContext";
 import SignupService from "../../services/SignupService";
 import LoadingScreen from "../../components/shared/LoadingScreen";
-import CreatedUserModal from "../../components/modals/UserSuccessfullyCreatedModal";
+import UserSuccessfullyCreatedModal from "../../components/modals/UserSuccessfullyCreatedModal";
 import EApiStatusResponse from "../../enums/apiStatusRespponse.enum";
 import EModalTime from "../../enums/modalTime.enum";
+import UserErrorCreatedModal from "../../components/modals/UserErrorCreatedModal";
 
 const RegisterScreen = () => {
     const { t } = useTranslation();
@@ -67,8 +68,16 @@ const RegisterScreen = () => {
         setIsLoading(true);
         await SignupService(formUserData.current)
             .then((res) => {
+                console.log(res);
                 if (res.status === EApiStatusResponse.SUCCESS) {
                     setCreatedUserSuccesfully(true);
+                    formUserData.current = {
+                        name: "",
+                        last_name: "",
+                        email: "",
+                        password: "",
+                        img_url: "",
+                    };
                 } else {
                     setCreatedUserError(true);
                 }
@@ -78,13 +87,6 @@ const RegisterScreen = () => {
             })
             .finally(() => {
                 setIsLoading(false);
-                formUserData.current = {
-                    name: "",
-                    last_name: "",
-                    email: "",
-                    password: "",
-                    img_url: "",
-                };
             });
     };
 
@@ -193,7 +195,8 @@ const RegisterScreen = () => {
                     </View>
                 </View>
             </PrincipalLayout>
-            <CreatedUserModal isVisible={createdUserSuccesfully} />
+            <UserSuccessfullyCreatedModal isVisible={createdUserSuccesfully} />
+            <UserErrorCreatedModal isVisible={createdUserError} />
         </>
     );
 };

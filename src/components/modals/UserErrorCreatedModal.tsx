@@ -2,15 +2,15 @@ import React, { useContext } from "react";
 import LayoutModal from "./LayoutModal";
 import { StatusBar, Text, View } from "react-native";
 import { ThemeContext } from "../../context/themeContext";
-import IconCheck from "../../icons/IconCheck";
 import useGlobalStyles from "../../styles/useGlobalStyles";
 import { useTranslation } from "react-i18next";
+import IconError from "../../icons/IconError";
 
 interface Props {
     isVisible: boolean;
 }
 
-const UserSuccessfullyCreatedModal = (props: Props) => {
+const UserErrorCreatedModal = (props: Props) => {
     const { theme } = useContext(ThemeContext);
     const { t } = useTranslation();
     const { confirmModal, iconConfirmModal, txtConfirmModal } =
@@ -28,13 +28,13 @@ const UserSuccessfullyCreatedModal = (props: Props) => {
                     <View
                         style={{
                             ...iconConfirmModal,
-                            backgroundColor: theme.green,
+                            backgroundColor: theme.red,
                         }}
                     >
-                        <IconCheck width={30} height={30} fill={theme.white} />
+                        <IconError width={30} height={30} fill={theme.white} />
                     </View>
                     <Text style={txtConfirmModal}>
-                        {t("Modal:Created_User")}
+                        {t("Modal:Error_Create_User")}
                     </Text>
                 </View>
             </LayoutModal>
@@ -42,4 +42,4 @@ const UserSuccessfullyCreatedModal = (props: Props) => {
     );
 };
 
-export default UserSuccessfullyCreatedModal;
+export default UserErrorCreatedModal;
