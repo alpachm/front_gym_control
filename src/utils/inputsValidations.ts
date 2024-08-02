@@ -13,3 +13,9 @@ export const validateConfirmPassword = (password: string, confirmPassword: strin
 
     return true;
 }
+
+export const validatePasswordLength = (password: string) => {
+    if(password.length < 7) return false;
+
+    return true;
+}

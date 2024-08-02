@@ -6,7 +6,7 @@ import { ThemeContext } from "../../context/themeContext";
 interface Props {
     placeholder: string;
     icon: (props: SvgProps) => React.JSX.Element;
-    onChenge: (e: string) => void;
+    onChange: (e: string) => void;
     inputMode: "text" | "numeric" | "email";
     secureTextEntry?: boolean;
     value?: string;
@@ -37,13 +37,17 @@ const PrimaryInput = (props: Props) => {
                     ...styles.input,
                     color: theme.white,
                     opacity: props.value ? 1 : 0.5,
+                    textTransform:
+                        props.inputMode === "email"
+                            ? "lowercase"
+                            : "capitalize",
                 }}
                 value={props.value}
                 placeholder={props.placeholder}
                 placeholderTextColor={theme.white}
                 cursorColor={theme.primary}
                 selectionColor={theme.primary}
-                onChangeText={props.onChenge}
+                onChangeText={props.onChange}
                 onBlur={props.onBlur && props.onBlur}
                 inputMode={props.inputMode}
                 onFocus={() => setIsFocused(true)}
@@ -74,6 +78,5 @@ const styles = StyleSheet.create({
         fontFamily: "Inter_100Thin",
         fontSize: 18,
         opacity: 0.5,
-        textTransform: "lowercase",
     },
 });

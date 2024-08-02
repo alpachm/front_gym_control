@@ -1,4 +1,6 @@
-export interface CreateUserDataEntity {
+import { FieldValues } from "react-hook-form";
+
+export interface CreateUserDataEntity extends FieldValues {
     name: string;
     last_name: string;
     email: string;

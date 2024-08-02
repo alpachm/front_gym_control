@@ -113,6 +113,8 @@
     },
     "Error": {
         "Invalid_Email": "Enter a valid email",
-        "Incorrect_Password": "Passwords do not match"
+        "Incorrect_Password": "Passwords do not match",
+        "Short_Password": "The password must have at least 7 characters",
+        "Required": "The field is required"
     }
 }

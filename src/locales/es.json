@@ -113,6 +113,8 @@
     },
     "Error": {
         "Invalid_Email": "Ingresa un email válido",
-        "Incorrect_Password": "Las contraseñas no coinciden"
+        "Incorrect_Password": "Las contraseñas no coinciden",
+        "Short_Password": "La contraseña debe tener al menos 7 caracteres",
+        "Required": "El campo es requerido"
     }
 }
