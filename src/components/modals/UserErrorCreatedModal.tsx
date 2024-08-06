@@ -8,6 +8,7 @@ import IconError from "../../icons/IconError";
 
 interface Props {
     isVisible: boolean;
+    title?: string;
 }
 
 const UserErrorCreatedModal = (props: Props) => {
@@ -34,7 +35,9 @@ const UserErrorCreatedModal = (props: Props) => {
                         <IconError width={30} height={30} fill={theme.white} />
                     </View>
                     <Text style={txtConfirmModal}>
-                        {t("Modal:Error_Create_User")}
+                        {props.title
+                            ? props.title
+                            : t("Modal:Error_Create_User")}
                     </Text>
                 </View>
             </LayoutModal>

@@ -18,19 +18,26 @@ import { ThemeContext } from "../../context/themeContext";
 import SignupService from "../../services/SignupService";
 import LoadingScreen from "../../components/shared/LoadingScreen";
 import UserSuccessfullyCreatedModal from "../../components/modals/UserSuccessfullyCreatedModal";
-import EApiStatusResponse from "../../enums/apiStatusRespponse.enum";
+import {
+    EApiStatusResponse,
+    EApiMessageResponse,
+} from "../../enums/apiResponse.enum";
 import EModalTime from "../../enums/modalTime.enum";
 import UserErrorCreatedModal from "../../components/modals/UserErrorCreatedModal";
 import { Controller, Form, useForm } from "react-hook-form";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { RootStackParams } from "../../navigation/StackNavigator";
 
 const RegisterScreen = () => {
     const { t } = useTranslation();
     const { theme } = useContext(ThemeContext);
+    const navigation = useNavigation<NavigationProp<RootStackParams>>();
     const {
         control,
         handleSubmit,
         watch,
         formState: { errors },
+        reset,
     } = useForm<CreateUserDataEntity>({
         defaultValues: {
             name: "",
@@ -49,12 +56,14 @@ const RegisterScreen = () => {
         isInvalidEmail: false,
         isDifferentPassword: false,
         isShortPassword: false,
+        isExistEmail: false,
     });
 
     useEffect(() => {
         if (createdUserSuccesfully) {
             setTimeout(() => {
                 setCreatedUserSuccesfully(false);
+                navigation.navigate("BottomTabsNavigator");
             }, EModalTime.SHORT);
         }
 
@@ -63,7 +72,13 @@ const RegisterScreen = () => {
                 setCreatedUserError(false);
             }, EModalTime.SHORT);
         }
-    }, [createdUserSuccesfully, createdUserError]);
+
+        if (errorsState.isExistEmail) {
+            setTimeout(() => {
+                setErrorsState({ ...errorsState, isExistEmail: false });
+            }, EModalTime.MEDIUM);
+        }
+    }, [createdUserSuccesfully, createdUserError, errorsState.isExistEmail]);
 
     const renderErrorMessage = (message: string) => {
         return (
@@ -75,40 +90,37 @@ const RegisterScreen = () => {
         );
     };
 
-    // const onSubmit = async () => {
-    //     setIsLoading(true);
-    //     await SignupService(formUserData.current)
-    //         .then((res) => {
-    //             console.log(res);
-    //             if (res.status === EApiStatusResponse.SUCCESS) {
-    //                 setCreatedUserSuccesfully(true);
-    //                 formUserData.current = {
-    //                     name: "",
-    //                     last_name: "",
-    //                     email: "",
-    //                     password: "",
-    //                     img_url: "",
-    //                 };
-    //             } else {
-    //                 setCreatedUserError(true);
-    //             }
-    //         })
-    //         .catch((error) => {
-    //             console.log("Error: ", error);
-    //         })
-    //         .finally(() => {
-    //             setIsLoading(false);
-    //         });
-    // };
-
-    const onSubmit = (data: CreateUserDataEntity) => {
+    const onSubmit = async (data: CreateUserDataEntity) => {
         console.log(data);
         setErrorsState({
             isDifferentPassword: false,
             isInvalidEmail: false,
             isRequired: false,
             isShortPassword: false,
+            isExistEmail: false,
         });
+
+        setIsLoading(true);
+        await SignupService(data)
+            .then((res) => {
+                if (res.message === EApiMessageResponse.EMAIL_EXIST) {
+                    setErrorsState({ ...errorsState, isExistEmail: true });
+                    return;
+                }
+
+                if (res.status === EApiStatusResponse.SUCCESS) {
+                    setCreatedUserSuccesfully(true);
+                    reset();
+                } else {
+                    setCreatedUserError(true);
+                }
+            })
+            .catch((error) => {
+                console.log("Error: ", error);
+            })
+            .finally(() => {
+                setIsLoading(false);
+            });
     };
 
     const cleanFieldError = (
@@ -311,10 +323,6 @@ const RegisterScreen = () => {
         );
     };
 
-    if (isLoading) {
-        return <LoadingScreen isLoading={isLoading} />;
-    }
-
     return (
         <>
             <PrincipalLayout status="Register" backButton>
@@ -325,17 +333,19 @@ const RegisterScreen = () => {
                         {renderInputs()}
                         <EnterFooter
                             buttonLabel={t("Actions:Register")}
-                            // onPress={async () => {
-                            //     await onSubmit();
-                            //     console.log("Data: ", formUserData.current);
-                            // }}
                             onPress={handleSubmit(onSubmit)}
                         />
                     </View>
                 </View>
             </PrincipalLayout>
+
+            {isLoading ? <LoadingScreen /> : null}
             <UserSuccessfullyCreatedModal isVisible={createdUserSuccesfully} />
             <UserErrorCreatedModal isVisible={createdUserError} />
+            <UserErrorCreatedModal
+                isVisible={errorsState.isExistEmail}
+                title={t("Error:Email_Exist")}
+            />
         </>
     );
 };
