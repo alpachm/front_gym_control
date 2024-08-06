@@ -97,7 +97,10 @@
         "Without_Routine": "Aún no tienes rutina asignada para este día ¿Deseas asignar una?",
         "Add_Exercise": "Agregar ejercicio",
         "Created_User": "Usuario creado exitosamente",
-        "Error_Create_User": "Error al intentar crear el usuario"
+        "Error_Create_User": "Error al intentar crear el usuario",
+        "Success_Login": "Inicio de sesión exitoso",
+        "Error_Login": "Error al intentar iniciar sesión",
+        "Wrong_Email_Or_Password": "Email o contraseña errada, por favor intentar nuevamente"
     },
     "Languages": {
         "English": "Inglés",

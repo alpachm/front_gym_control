@@ -97,7 +97,10 @@
         "Without_Routine": "You still don't have a routine assigned for this day. Do you want to assign one?",
         "Add_Exercise": "Add exercise",
         "Created_User": "User successfully created",
-        "Error_Create_User": "Error when trying to create user"
+        "Error_Create_User": "Error when trying to create user",
+        "Success_Login": "Successful login",
+        "Error_Login": "Error trying to log in",
+        "Wrong_Email_Or_Password": "Incorrect email or password, please try again."
     },
     "Languages": {
         "English": "English",

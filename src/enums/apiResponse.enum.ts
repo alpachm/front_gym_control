@@ -5,5 +5,6 @@ export enum EApiStatusResponse {
 }
 
 export enum EApiMessageResponse {
-    EMAIL_EXIST = "The email is already registered, enter another email"
+    EMAIL_EXIST = "The email is already registered, enter another email",
+    WRONG_EMAIL_OR_PASSWORD = "Email or password incorrect, please try again"
 }

@@ -17,16 +17,17 @@ import {
 import { ThemeContext } from "../../context/themeContext";
 import SignupService from "../../services/SignupService";
 import LoadingScreen from "../../components/shared/LoadingScreen";
-import UserSuccessfullyCreatedModal from "../../components/modals/UserSuccessfullyCreatedModal";
+import SuccessModal from "../../components/modals/SuccessModal";
 import {
     EApiStatusResponse,
     EApiMessageResponse,
 } from "../../enums/apiResponse.enum";
 import EModalTime from "../../enums/modalTime.enum";
-import UserErrorCreatedModal from "../../components/modals/UserErrorCreatedModal";
+import ErrorModal from "../../components/modals/ErrorModal";
 import { Controller, Form, useForm } from "react-hook-form";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { RootStackParams } from "../../navigation/StackNavigator";
+import InputErrorMessage from "../../components/shared/InputErrorMessage";
 
 const RegisterScreen = () => {
     const { t } = useTranslation();
@@ -80,18 +81,7 @@ const RegisterScreen = () => {
         }
     }, [createdUserSuccesfully, createdUserError, errorsState.isExistEmail]);
 
-    const renderErrorMessage = (message: string) => {
-        return (
-            <View style={styles.errorTxtContainer}>
-                <Text style={{ ...styles.errorTxt, color: theme.red_error }}>
-                    {message}
-                </Text>
-            </View>
-        );
-    };
-
     const onSubmit = async (data: CreateUserDataEntity) => {
-        console.log(data);
         setErrorsState({
             isDifferentPassword: false,
             isInvalidEmail: false,
@@ -180,9 +170,9 @@ const RegisterScreen = () => {
                         />
                     )}
                 />
-                {errors.name?.type === "required"
-                    ? renderErrorMessage(t("Error:Required"))
-                    : null}
+                {errors.name?.type === "required" ? (
+                    <InputErrorMessage message={t("Error:Required")} />
+                ) : null}
                 <Controller
                     control={control}
                     name="last_name"
@@ -199,9 +189,9 @@ const RegisterScreen = () => {
                         />
                     )}
                 />
-                {errors.last_name?.type === "required"
-                    ? renderErrorMessage(t("Error:Required"))
-                    : null}
+                {errors.last_name?.type === "required" ? (
+                    <InputErrorMessage message={t("Error:Required")} />
+                ) : null}
                 <Controller
                     control={control}
                     name="email"
@@ -233,12 +223,12 @@ const RegisterScreen = () => {
                         />
                     )}
                 />
-                {errors.email?.type === "required"
-                    ? renderErrorMessage(t("Error:Required"))
-                    : null}
-                {errorsState.isInvalidEmail
-                    ? renderErrorMessage(t("Error:Invalid_Email"))
-                    : null}
+                {errors.email?.type === "required" ? (
+                    <InputErrorMessage message={t("Error:Required")} />
+                ) : null}
+                {errorsState.isInvalidEmail ? (
+                    <InputErrorMessage message={t("Error:Invalid_Email")} />
+                ) : null}
                 <Controller
                     control={control}
                     name="password"
@@ -273,12 +263,12 @@ const RegisterScreen = () => {
                         />
                     )}
                 />
-                {errors.password?.type === "required"
-                    ? renderErrorMessage(t("Error:Required"))
-                    : null}
-                {errorsState.isShortPassword
-                    ? renderErrorMessage(t("Error:Short_Password"))
-                    : null}
+                {errors.password?.type === "required" ? (
+                    <InputErrorMessage message={t("Error:Required")} />
+                ) : null}
+                {errorsState.isShortPassword ? (
+                    <InputErrorMessage message={t("Error:Short_Password")} />
+                ) : null}
                 <Controller
                     control={control}
                     name="confirm_password"
@@ -313,14 +303,32 @@ const RegisterScreen = () => {
                         />
                     )}
                 />
-                {errors.confirm_password?.type === "required"
-                    ? renderErrorMessage(t("Error:Required"))
-                    : null}
-                {errorsState.isDifferentPassword
-                    ? renderErrorMessage(t("Error:Incorrect_Password"))
-                    : null}
+                {errors.confirm_password?.type === "required" ? (
+                    <InputErrorMessage message={t("Error:Required")} />
+                ) : null}
+                {errorsState.isDifferentPassword ? (
+                    <InputErrorMessage
+                        message={t("Error:Incorrect_Password")}
+                    />
+                ) : null}
             </View>
         );
+    };
+
+    const renderModals = () => {
+        if (createdUserSuccesfully) {
+            return <SuccessModal title={t("Modal:Created_User")} />;
+        }
+
+        if (createdUserError) {
+            return <ErrorModal title={t("Modal:Error_Create_User")} />;
+        }
+
+        if (errorsState.isExistEmail) {
+            return <ErrorModal title={t("Error:Email_Exist")} />;
+        }
+
+        return null;
     };
 
     return (
@@ -340,12 +348,7 @@ const RegisterScreen = () => {
             </PrincipalLayout>
 
             {isLoading ? <LoadingScreen /> : null}
-            <UserSuccessfullyCreatedModal isVisible={createdUserSuccesfully} />
-            <UserErrorCreatedModal isVisible={createdUserError} />
-            <UserErrorCreatedModal
-                isVisible={errorsState.isExistEmail}
-                title={t("Error:Email_Exist")}
-            />
+            {renderModals()}
         </>
     );
 };
@@ -360,14 +363,5 @@ const styles = StyleSheet.create({
     inputsView: {
         gap: 12,
         marginBottom: 54,
-    },
-    errorTxtContainer: {
-        flexDirection: "row",
-        justifyContent: "center",
-        alignItems: "center",
-    },
-    errorTxt: {
-        marginTop: -10,
-        fontFamily: "Inter_200ExtraLight",
     },
 });

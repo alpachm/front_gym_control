@@ -2,16 +2,15 @@ import React, { useContext } from "react";
 import LayoutModal from "./LayoutModal";
 import { StatusBar, Text, View } from "react-native";
 import { ThemeContext } from "../../context/themeContext";
+import IconCheck from "../../icons/IconCheck";
 import useGlobalStyles from "../../styles/useGlobalStyles";
 import { useTranslation } from "react-i18next";
-import IconError from "../../icons/IconError";
 
 interface Props {
-    isVisible: boolean;
-    title?: string;
+    title: string;
 }
 
-const UserErrorCreatedModal = (props: Props) => {
+const SuccessModal = (props: Props) => {
     const { theme } = useContext(ThemeContext);
     const { t } = useTranslation();
     const { confirmModal, iconConfirmModal, txtConfirmModal } =
@@ -19,30 +18,22 @@ const UserErrorCreatedModal = (props: Props) => {
 
     return (
         <>
-            <StatusBar
-                backgroundColor={
-                    props.isVisible ? theme.backdrop_color : "transparent"
-                }
-            />
-            <LayoutModal isVisible={props.isVisible}>
+            <StatusBar backgroundColor={theme.backdrop_color} />
+            <LayoutModal isVisible>
                 <View style={confirmModal}>
                     <View
                         style={{
                             ...iconConfirmModal,
-                            backgroundColor: theme.red,
+                            backgroundColor: theme.green,
                         }}
                     >
-                        <IconError width={30} height={30} fill={theme.white} />
+                        <IconCheck width={30} height={30} fill={theme.white} />
                     </View>
-                    <Text style={txtConfirmModal}>
-                        {props.title
-                            ? props.title
-                            : t("Modal:Error_Create_User")}
-                    </Text>
+                    <Text style={txtConfirmModal}>{props.title}</Text>
                 </View>
             </LayoutModal>
         </>
     );
 };
 
-export default UserErrorCreatedModal;
+export default SuccessModal;

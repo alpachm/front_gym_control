@@ -3,7 +3,6 @@ import { CreateUserDataEntity } from "../entities/createUserData.entity";
 import { ISignupResponse } from "../interfaces/SignupResponse.interface";
 
 const SignupService = async (data: CreateUserDataEntity): Promise<ISignupResponse> => {
-    console.log("Data: ", data)
     try {
         const result = await fetch(process.env.EXPO_PUBLIC_API_URL + "/auth/signup", {
             method: "POST",
