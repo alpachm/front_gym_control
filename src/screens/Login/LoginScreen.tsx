@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import PrincipalLayout from "../../PrincipalLayout";
 import Title from "../../components/shared/Title";
 import { useTranslation } from "react-i18next";
@@ -15,7 +15,6 @@ import { LoginUserEntity } from "../../entities/loginUser.entity";
 import InputErrorMessage from "../../components/shared/InputErrorMessage";
 import { validateIfValidEmail } from "../../utils/inputsValidations";
 import LoginService from "../../services/LoginService";
-import { ILoginResponse } from "../../interfaces/LoginResponse.interface";
 import {
     EApiMessageResponse,
     EApiStatusResponse,
@@ -24,6 +23,7 @@ import EModalTime from "../../enums/modalTime.enum";
 import SuccessModal from "../../components/modals/SuccessModal";
 import ErrorModal from "../../components/modals/ErrorModal";
 import LoadingScreen from "../../components/shared/LoadingScreen";
+import { getData, storeData } from "../../utils/asyncStorage";
 
 const LoginScreen = () => {
     const { t } = useTranslation();
@@ -76,7 +76,7 @@ const LoginScreen = () => {
     const onSubmit = async (data: LoginUserEntity) => {
         setIsLoading(true);
         await LoginService(data)
-            .then((res) => {
+            .then(async (res) => {
                 if (
                     res.message === EApiMessageResponse.WRONG_EMAIL_OR_PASSWORD
                 ) {
@@ -88,6 +88,7 @@ const LoginScreen = () => {
                 }
 
                 if (res.status === EApiStatusResponse.SUCCESS) {
+                    await storeData("token", JSON.stringify(res.token));
                     setSuccessLogin(true);
                     reset();
                 } else {
