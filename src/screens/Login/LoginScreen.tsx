@@ -44,6 +44,7 @@ const LoginScreen = () => {
     const [errorsState, setErrorsState] = useState({
         isInvalidEmail: false,
         isWrongEmailOrPassword: false,
+        isUserNotFound: false,
     });
     const [isLoading, setIsLoading] = useState(false);
     const [successLogin, setSuccessLogin] = useState(false);
@@ -71,7 +72,16 @@ const LoginScreen = () => {
                 });
             }, EModalTime.MEDIUM);
         }
-    }, [successLogin, errorLogin, errorsState.isWrongEmailOrPassword]);
+
+        if (errorsState.isUserNotFound) {
+            setTimeout(() => {
+                setErrorsState({
+                    ...errorsState,
+                    isUserNotFound: false,
+                });
+            }, EModalTime.MEDIUM);
+        }
+    }, [successLogin, errorLogin, errorsState]);
 
     const onSubmit = async (data: LoginUserEntity) => {
         setIsLoading(true);
@@ -83,6 +93,14 @@ const LoginScreen = () => {
                     setErrorsState({
                         ...errorsState,
                         isWrongEmailOrPassword: true,
+                    });
+                    return;
+                }
+
+                if (res.message === EApiMessageResponse.USER_NOT_FOUND) {
+                    setErrorsState({
+                        ...errorsState,
+                        isUserNotFound: true,
                     });
                     return;
                 }
@@ -114,6 +132,10 @@ const LoginScreen = () => {
 
         if (errorsState.isWrongEmailOrPassword) {
             return <ErrorModal title={t("Modal:Wrong_Email_Or_Password")} />;
+        }
+
+        if (errorsState.isUserNotFound) {
+            return <ErrorModal title={t("Modal:User_Not_Found")} />;
         }
 
         return null;

@@ -100,7 +100,8 @@
         "Error_Create_User": "Error al intentar crear el usuario",
         "Success_Login": "Inicio de sesión exitoso",
         "Error_Login": "Error al intentar iniciar sesión",
-        "Wrong_Email_Or_Password": "Email o contraseña errada, por favor intentar nuevamente"
+        "Wrong_Email_Or_Password": "Email o contraseña errada, por favor intentar nuevamente",
+        "User_Not_Found": "No hay usuario registrado con este email, intenta iniciar sesión con un usuario diferente"
     },
     "Languages": {
         "English": "Inglés",
