@@ -23,7 +23,7 @@ import EModalTime from "../../enums/modalTime.enum";
 import SuccessModal from "../../components/modals/SuccessModal";
 import ErrorModal from "../../components/modals/ErrorModal";
 import LoadingScreen from "../../components/shared/LoadingScreen";
-import { getData, storeData } from "../../utils/asyncStorage";
+import { clearAllStorageData, setStorageData } from "../../utils/asyncStorage";
 
 const LoginScreen = () => {
     const { t } = useTranslation();
@@ -106,7 +106,9 @@ const LoginScreen = () => {
                 }
 
                 if (res.status === EApiStatusResponse.SUCCESS) {
-                    await storeData("token", JSON.stringify(res.token));
+                    await clearAllStorageData();
+                    await setStorageData("user", JSON.stringify(res.user));
+                    await setStorageData("token", res.token);
                     setSuccessLogin(true);
                     reset();
                 } else {

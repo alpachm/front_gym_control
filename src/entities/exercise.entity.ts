@@ -1,9 +1,10 @@
 export default interface ExerciseEntity {
-    id: number;
+    pk_exercise: number;
     name: string; 
-    reps: number;
     last_weight: number;
-    current_weight: number;
+    weight: number;
+    repetitions: number;
     img_url: string;
     completed: boolean;
+    status: boolean;
 }

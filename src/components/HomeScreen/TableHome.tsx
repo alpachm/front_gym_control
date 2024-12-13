@@ -20,9 +20,9 @@ const TableHome = (props: Props) => {
     const { t } = useTranslation();
 
     const setCurrectWeightColr = () => {
-        if (props.exercise.current_weight > props.exercise.last_weight) {
+        if (props.exercise.weight > props.exercise.last_weight) {
             return theme.blue;
-        } else if (props.exercise.current_weight < props.exercise.last_weight) {
+        } else if (props.exercise.weight < props.exercise.last_weight) {
             return theme.red;
         } else {
             return theme.text_color;
@@ -39,7 +39,9 @@ const TableHome = (props: Props) => {
                     {t("HomeScreen:Reps")}
                 </Text>
                 <View style={styles.noRepsContainer}>
-                    <Text style={styles.noRepsText}>{props.exercise.reps}</Text>
+                    <Text style={styles.noRepsText}>
+                        {props.exercise.repetitions}
+                    </Text>
                 </View>
             </View>
         );
@@ -64,7 +66,7 @@ const TableHome = (props: Props) => {
                     >
                         {t("HomeScreen:Current_Weight")}
                     </Text>
-                    {!props.exercise.current_weight ? (
+                    {!props.exercise.weight ? (
                         <Pressable
                             style={({ pressed }) => [
                                 {
@@ -75,7 +77,9 @@ const TableHome = (props: Props) => {
                             ]}
                             onPress={() => {
                                 props.setShowModal(true);
-                                setSelectedExerciseId(props.exercise.id);
+                                setSelectedExerciseId(
+                                    props.exercise.pk_exercise
+                                );
                             }}
                         >
                             <Text
@@ -95,7 +99,7 @@ const TableHome = (props: Props) => {
                                     color: setCurrectWeightColr(),
                                 }}
                             >
-                                {`${props.exercise.current_weight} kg`}
+                                {`${props.exercise.weight} kg`}
                             </Text>
                         </View>
                     )}

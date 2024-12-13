@@ -50,7 +50,8 @@
         "Reps": "Repetitions",
         "Last_Weight": "Last weight",
         "Current_Weight": "Current weight",
-        "Enter_Weight": "Enter"
+        "Enter_Weight": "Enter",
+        "No_Routines": "No routines available"
     },
     "RoutineScreen": {
         "Title": "Routines",

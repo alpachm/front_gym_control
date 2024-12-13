@@ -50,7 +50,8 @@
         "Reps": "Repeticiones",
         "Last_Weight": "Último peso",
         "Current_Weight": "Peso actual",
-        "Enter_Weight": "Ingresar"
+        "Enter_Weight": "Ingresar",
+        "No_Routines": "Sin rutinas disponibles"
     },
     "RoutineScreen": {
       "Title": "Rutinas",

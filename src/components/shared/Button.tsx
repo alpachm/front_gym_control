@@ -13,6 +13,7 @@ interface Props {
     icon?: (props: SvgProps) => React.JSX.Element;
     iconWidth?: number;
     iconHeight?: number;
+    background?: string;
 }
 
 const Button = (props: Props) => {
@@ -26,7 +27,7 @@ const Button = (props: Props) => {
             alignItems: "center",
             justifyContent: "center",
             position: "relative",
-            backgroundColor: theme.primary,
+            backgroundColor: props.background ?? theme.primary,
             width: props.width ?? 250,
             height: props.height ?? 60,
             gap: props.icon ? 35 : 0,
