@@ -66,6 +66,7 @@ const ContentHomeScreen = () => {
 
                 if (res.status === EApiStatusResponse.SUCCESS) {
                     setRoutinesData(res);
+                    getExercisesByDay(res);
                 }
             })
             .catch((error) => {
@@ -75,12 +76,12 @@ const ContentHomeScreen = () => {
             });
     };
 
-    const getExercisesByDay = () => {
+    const getExercisesByDay = (routinesData: IGetRoutinesResponse) => {
+        const exercisesArray: ExerciseEntity[] = [];
         const exercisePerDay: Routine | undefined = routinesData?.routines.find(
             (routine) => routine.fk_day === selectedDay
         );
         exercisePerDay?.RoutineExercises.forEach((exercise) => {
-            console.log("----------------Z", exercise);
             const toExercise: ExerciseEntity = {
                 pk_exercise: exercise.Exercise.pk_exercise,
                 name: exercise.Exercise.name,
@@ -92,9 +93,9 @@ const ContentHomeScreen = () => {
                 completed: false,
             };
 
-            setExercises((prev) => [...prev, toExercise]);
+            exercisesArray.push(toExercise);
         });
-        setExercises(exercises);
+        setExercises(exercisesArray);
     };
 
     useEffect(() => {
@@ -104,12 +105,10 @@ const ContentHomeScreen = () => {
     }, [currentDay]);
 
     useEffect(() => {
-        if (selectedDay) {
-            getExercisesByDay();
+        if (selectedDay && routinesData) {
+            getExercisesByDay(routinesData);
         }
-    }, [selectedDay]);
-
-    console.log("--------------------->", exercises, selectedDay);
+    }, [selectedDay, routinesData]);
 
     const renderDaysOptions = () => {
         return (
@@ -140,7 +139,7 @@ const ContentHomeScreen = () => {
     const renderExerciseList = () => {
         return (
             <View style={styles.exerciseListContainer}>
-                {exerciseData.map((exercise) => (
+                {exercises.map((exercise) => (
                     <TableHome
                         key={exercise.pk_exercise}
                         exercise={exercise}

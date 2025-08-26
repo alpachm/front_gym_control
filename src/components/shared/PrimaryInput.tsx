@@ -38,9 +38,7 @@ const PrimaryInput = (props: Props) => {
                     color: theme.white,
                     opacity: props.value ? 1 : 0.5,
                     textTransform:
-                        props.inputMode === "email"
-                            ? "lowercase"
-                            : "capitalize",
+                        props.inputMode === "email" ? "lowercase" : "none",
                 }}
                 value={props.value}
                 placeholder={props.placeholder}
