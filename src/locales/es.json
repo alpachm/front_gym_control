@@ -102,7 +102,10 @@
         "Success_Login": "Inicio de sesión exitoso",
         "Error_Login": "Error al intentar iniciar sesión",
         "Wrong_Email_Or_Password": "Email o contraseña errada, por favor intentar nuevamente",
-        "User_Not_Found": "No hay usuario registrado con este email, intenta iniciar sesión con un usuario diferente"
+        "User_Not_Found": "No hay usuario registrado con este email, intenta iniciar sesión con un usuario diferente",
+        "Created_Routine": "La rutina fue creada exitosamente",
+        "Error_Create_Routine": "Error al intentar crear la rutina",
+        "Already_Routine_Assigned_Day": "Ya existe una rutina asignada para este día"
     },
     "Languages": {
         "English": "Inglés",

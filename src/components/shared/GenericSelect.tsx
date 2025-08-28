@@ -9,6 +9,8 @@ import useGlobalStyles from "../../styles/useGlobalStyles";
 interface Props {
     placeholder: string;
     data: SelectEntity[];
+    value: number;
+    onChange: (e: number) => void;
 }
 
 const GenericSelect = (props: Props) => {
@@ -18,8 +20,9 @@ const GenericSelect = (props: Props) => {
     return (
         <SelectDropdown
             data={props.data}
+            defaultValue={props.value}
             onSelect={(selectedItem, index) => {
-                console.log(selectedItem, index);
+                props.onChange(selectedItem.value);
             }}
             renderButton={(selectedItem, isOpened) => {
                 return (
@@ -36,8 +39,9 @@ const GenericSelect = (props: Props) => {
                                 color: theme.text_color,
                             }}
                         >
-                            {(selectedItem && selectedItem.title) ||
-                                props.placeholder}
+                            {props.value
+                                ? selectedItem && selectedItem.title
+                                : props.placeholder}
                         </Text>
                         <IconDownArrow
                             width={11}

@@ -1,16 +1,9 @@
-import React, {
-    Dispatch,
-    SetStateAction,
-    useContext,
-    useEffect,
-    useState,
-} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ScrollView } from "react-native-gesture-handler";
 import days from "../../utils/days";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import Day from "./Day";
 import { ThemeContext } from "../../context/themeContext";
-import exerciseData from "../../utils/exercises.data";
 import TableHome from "./TableHome";
 import EnterWeightModal from "../modals/EnterWeightModal";
 import WithoutRoutineModal from "../modals/WithoutRoutineModal";
@@ -23,24 +16,20 @@ import {
     Routine,
 } from "../../interfaces/GetRoutinesResponse.interface";
 import { EApiStatusResponse } from "../../enums/apiResponse.enum";
-import Button from "../shared/Button";
-import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
-import { RootAppStackParams } from "../../navigation/AppStackNavigator";
 import NoContentMessage from "./NoContentMessage";
 import ExerciseEntity from "../../entities/exercise.entity";
 
 const ContentHomeScreen = () => {
     const { theme } = useContext(ThemeContext);
-    const { currentDay } = useContext(UserContext);
-    const navigation = useNavigation<NavigationProp<RootAppStackParams>>();
+    const { currentDay, routinesData, setRoutinesData } =
+        useContext(UserContext);
     const { t } = useTranslation();
     const [selectedDay, setSelectedDay] = useState(0);
     const [showEnterWeightModal, setShowEnterWeightModal] = useState(false);
     const [showWithoutRoutineModal, setShowWithoutRoutineModal] =
         useState(false);
     const [contentIsLoading, setContentIsLoading] = useState(true);
-    const [routinesData, setRoutinesData] = useState<IGetRoutinesResponse>();
     const [exercises, setExercises] = useState<ExerciseEntity[]>([]);
     const [noRoutines, setNoRoutines] = useState(false);
 
@@ -70,7 +59,7 @@ const ContentHomeScreen = () => {
                 }
             })
             .catch((error) => {
-                console.log(
+                console.error(
                     "Error when trying to obtain the routines " + error
                 );
             });
@@ -105,7 +94,7 @@ const ContentHomeScreen = () => {
     }, [currentDay]);
 
     useEffect(() => {
-        if (selectedDay && routinesData) {
+        if (selectedDay && Object.keys(routinesData).length > 0) {
             getExercisesByDay(routinesData);
         }
     }, [selectedDay, routinesData]);

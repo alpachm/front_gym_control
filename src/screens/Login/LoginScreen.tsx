@@ -150,7 +150,7 @@ const LoginScreen = () => {
                     control={control}
                     name="email"
                     rules={{ required: true }}
-                    render={({ field: { onChange, onBlur, value } }) => (
+                    render={({ field: { onChange, value } }) => (
                         <PrimaryInput
                             placeholder={t("PlaceholderText:Enter_Email")}
                             onChange={onChange}

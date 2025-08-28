@@ -6,6 +6,7 @@ import useGlobalStyles from "../../styles/useGlobalStyles";
 interface Props {
     placeholder: string;
     onChange: () => void;
+    value: string;
 }
 
 const GenericInput = (props: Props) => {
@@ -20,11 +21,12 @@ const GenericInput = (props: Props) => {
                 borderColor: theme.text_color,
                 color: theme.text_color,
             }}
+            value={props.value}
             placeholder={props.placeholder}
             placeholderTextColor={theme.text_color}
             cursorColor={theme.primary}
             selectionColor={theme.primary}
-            onChange={props.onChange}
+            onChangeText={props.onChange}
         />
     );
 };

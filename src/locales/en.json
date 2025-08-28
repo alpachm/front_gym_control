@@ -102,7 +102,10 @@
         "Success_Login": "Successful login",
         "Error_Login": "Error trying to log in",
         "Wrong_Email_Or_Password": "Incorrect email or password, please try again.",
-        "User_Not_Found": "No user registered with this email address, try logging in with a different user."
+        "User_Not_Found": "No user registered with this email address, try logging in with a different user.",
+        "Created_Routine": "The routine was successfully created",
+        "Error_Create_Routine": "Error while attempting to create the routine",
+        "Already_Routine_Assigned_Day": "There is already a routine assigned for this day"
     },
     "Languages": {
         "English": "English",

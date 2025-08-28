@@ -14,6 +14,7 @@ export interface ITheme {
     red_error: string;
     blue: string;
     black: string;
+    yellow: string;
     switch_actived_color: string;
     switch_desactived_color: string;
 }
@@ -34,6 +35,7 @@ export const light_theme: ITheme = {
     red_error: "#EE4E4E",
     blue: "#5484FF",
     black: "#0C0C0C",
+    yellow: "#FCC61D",
     switch_actived_color: "#96C9F4",
     switch_desactived_color: "#C3C3C3"
 };
@@ -54,6 +56,7 @@ export const dark_theme: ITheme = {
     red_error: "#EE4E4E",
     blue: "#5484FF",
     black: "#0C0C0C",
+    yellow: "#FCC61D",
     switch_actived_color: "#96C9F4",
     switch_desactived_color: "#C3C3C3"
 };

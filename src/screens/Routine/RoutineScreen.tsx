@@ -6,32 +6,32 @@ import { useTranslation } from "react-i18next";
 import { ThemeContext } from "../../context/themeContext";
 import Button from "../../components/shared/Button";
 import IconPlus from "../../icons/IconPlus";
-import routineData from "../../utils/routines.data";
 import IconEdit from "../../icons/IconEdit";
 import IconDelete from "../../icons/IconDelete";
 import { toCapitalize } from "../../utils/formatText";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { RootAppStackParams } from "../../navigation/AppStackNavigator";
+import useEntityFormat from "../../hooks/useEntityFormat";
+import { UserContext } from "../../context/userContext";
 
 const RoutineScreen = () => {
     const { t } = useTranslation();
     const { theme } = useContext(ThemeContext);
+    const { routinesData } = useContext(UserContext);
     const navigation = useNavigation<NavigationProp<RootAppStackParams>>();
+    const { toRoutinesEntity } = useEntityFormat();
 
     const renderRoutines = () => {
         return (
             <ScrollView showsVerticalScrollIndicator={false}>
-                {routineData.map((routine, index) => (
+                {toRoutinesEntity(routinesData).map((routine, index) => (
                     <View
                         style={{
                             ...styles.table,
                             backgroundColor: routine.assigned
                                 ? theme.green
                                 : theme.bg_modal,
-                            marginVertical:
-                                index !== 0 && index !== routineData.length - 1
-                                    ? 10
-                                    : 0,
+                            marginVertical: 5,
                         }}
                         key={`${routine.id}-${index}`}
                     >

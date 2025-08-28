@@ -106,7 +106,7 @@ const RegisterScreen = () => {
                 }
             })
             .catch((error) => {
-                console.log("Error: ", error);
+                console.error("Error while attempting to register: ", error);
             })
             .finally(() => {
                 setIsLoading(false);
