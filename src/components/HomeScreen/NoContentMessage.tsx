@@ -9,6 +9,9 @@ interface Props {
     title: string;
     buttonLabel: string;
     onPress: () => void;
+    additionalButton?: boolean;
+    buttonLabelAddBtn?: string;
+    onPressAddBtn?: () => void;
 }
 
 const NoContentMessage = (props: Props) => {
@@ -29,10 +32,21 @@ const NoContentMessage = (props: Props) => {
                 label={props.buttonLabel}
                 iconWidth={20}
                 iconHeight={20}
-                width={130}
+                width={160}
                 height={50}
                 onPress={props.onPress}
             />
+            {props.additionalButton && (
+                <Button
+                    background={theme.green}
+                    label={props.buttonLabelAddBtn ?? props.buttonLabel}
+                    iconWidth={20}
+                    iconHeight={20}
+                    width={160}
+                    height={50}
+                    onPress={props.onPressAddBtn ?? props.onPress}
+                />
+            )}
         </View>
     );
 };
@@ -51,5 +65,6 @@ const styles = StyleSheet.create({
         fontFamily: "Inter_800ExtraBold",
         textTransform: "uppercase",
         fontSize: 20,
+        textAlign: "center",
     },
 });

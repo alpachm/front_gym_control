@@ -51,7 +51,8 @@
         "Last_Weight": "Last weight",
         "Current_Weight": "Current weight",
         "Enter_Weight": "Enter",
-        "No_Routines": "No routines available"
+        "No_Routines": "There are no routines available",
+        "No_Routine_Today": "You have no routine assigned for today"
     },
     "RoutineScreen": {
         "Title": "Routines",
@@ -68,7 +69,9 @@
     "ExerciseScreen": {
         "Exercises": "Exercises",
         "Create_Exercise": "Create exercise",
-        "No_Exercises": "No exercises available"
+        "No_Exercises": "No exercises available",
+        "No_Exercises_Today": "You have no assignments for today",
+        "Assign_Exercise": "Assign exercise"
     },
     "CreateExerciseScreen": {
         "Title": "Crea tu ejercicio, entrena y triunfa",

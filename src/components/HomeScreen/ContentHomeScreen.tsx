@@ -21,6 +21,7 @@ import NoContentMessage from "./NoContentMessage";
 import ExerciseEntity from "../../entities/exercise.entity";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { RootAppStackParams } from "../../navigation/AppStackNavigator";
+import { RoutineExercise } from "../../interfaces/GetRoutinesResponse.interface";
 
 const ContentHomeScreen = () => {
     const { theme } = useContext(ThemeContext);
@@ -35,6 +36,8 @@ const ContentHomeScreen = () => {
     const [contentIsLoading, setContentIsLoading] = useState(true);
     const [exercises, setExercises] = useState<ExerciseEntity[]>([]);
     const [noRoutines, setNoRoutines] = useState(false);
+    const [daysWithRoutine, setDaysWithRoutine] = useState<number[]>([]);
+    const [daysWithExercise, setDaysWithExercise] = useState<number[]>([]);
 
     const getRoutines = async (currentDay: string) => {
         const user = await getStorageData("user");
@@ -59,6 +62,22 @@ const ContentHomeScreen = () => {
                 if (res.status === EApiStatusResponse.SUCCESS) {
                     setRoutinesData(res);
                     getExercisesByDay(res);
+
+                    const arrayDays = res.routines.map(
+                        (routine) => routine.fk_day
+                    );
+                    const arrayDaysWithExercise = res.routines.map(
+                        (routine) => {
+                            if (routine.RoutineExercises.length) {
+                                return routine.fk_day;
+                            } else {
+                                return 0;
+                            }
+                        }
+                    );
+
+                    setDaysWithRoutine(arrayDays);
+                    setDaysWithExercise(arrayDaysWithExercise);
                 }
             })
             .catch((error) => {
@@ -142,20 +161,51 @@ const ContentHomeScreen = () => {
         );
     };
 
-    return contentIsLoading ? (
-        <LoadingScreen />
-    ) : (
-        <ScrollView>
-            {renderDaysOptions()}
-            {noRoutines ? (
+    const renderNoContentMessage = () => {
+        if (noRoutines) {
+            return (
                 <NoContentMessage
                     title={t("HomeScreen:No_Routines")}
                     buttonLabel={t("RoutineScreen:Create_Routine")}
                     onPress={() => navigation.navigate("CreateRoutine", {})}
                 />
-            ) : (
-                renderExerciseList()
-            )}
+            );
+        }
+
+        if (!daysWithRoutine.includes(selectedDay)) {
+            return (
+                <NoContentMessage
+                    title={t("HomeScreen:No_Routine_Today")}
+                    buttonLabel={t("RoutineScreen:Create_Routine")}
+                    onPress={() => navigation.navigate("CreateRoutine", {})}
+                />
+            );
+        }
+
+        if (!daysWithExercise.includes(selectedDay)) {
+            return (
+                <NoContentMessage
+                    title={t("ExerciseScreen:No_Exercises_Today")}
+                    buttonLabel={t("ExerciseScreen:Create_Exercise")}
+                    onPress={() => navigation.navigate("CreateExercise", {})}
+                    additionalButton
+                    buttonLabelAddBtn={t("ExerciseScreen:Assign_Exercise")}
+                    onPressAddBtn={() => navigation.navigate("Exercise")}
+                />
+            );
+        }
+    };
+
+    return contentIsLoading ? (
+        <LoadingScreen />
+    ) : (
+        <ScrollView>
+            {renderDaysOptions()}
+            {noRoutines ||
+            !daysWithRoutine.includes(selectedDay) ||
+            !daysWithExercise.includes(selectedDay)
+                ? renderNoContentMessage()
+                : renderExerciseList()}
             <EnterWeightModal
                 isVisible={showEnterWeightModal}
                 setIsVisible={setShowEnterWeightModal}
