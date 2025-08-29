@@ -67,7 +67,8 @@
     },
     "ExerciseScreen": {
         "Exercises": "Ejercicios",
-        "Create_Exercise": "Crear ejercicio"
+        "Create_Exercise": "Crear ejercicio",
+        "No_Exercises": "Sin ejercicios disponibles"
     },
     "CreateExerciseScreen": {
         "Title": "Crea tu ejercicio, entrena y triunfa",

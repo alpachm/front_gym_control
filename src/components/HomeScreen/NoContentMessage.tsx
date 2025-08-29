@@ -8,11 +8,11 @@ import { RootAppStackParams } from "../../navigation/AppStackNavigator";
 interface Props {
     title: string;
     buttonLabel: string;
+    onPress: () => void;
 }
 
 const NoContentMessage = (props: Props) => {
     const { theme } = useContext(ThemeContext);
-    const navigation = useNavigation<NavigationProp<RootAppStackParams>>();
 
     return (
         <View style={styles.noRoutineMessageContainer}>
@@ -31,7 +31,7 @@ const NoContentMessage = (props: Props) => {
                 iconHeight={20}
                 width={130}
                 height={50}
-                onPress={() => navigation.navigate("CreateRoutine", {})}
+                onPress={props.onPress}
             />
         </View>
     );

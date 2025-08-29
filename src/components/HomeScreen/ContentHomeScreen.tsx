@@ -19,12 +19,15 @@ import { EApiStatusResponse } from "../../enums/apiResponse.enum";
 import { useTranslation } from "react-i18next";
 import NoContentMessage from "./NoContentMessage";
 import ExerciseEntity from "../../entities/exercise.entity";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { RootAppStackParams } from "../../navigation/AppStackNavigator";
 
 const ContentHomeScreen = () => {
     const { theme } = useContext(ThemeContext);
     const { currentDay, routinesData, setRoutinesData } =
         useContext(UserContext);
     const { t } = useTranslation();
+    const navigation = useNavigation<NavigationProp<RootAppStackParams>>();
     const [selectedDay, setSelectedDay] = useState(0);
     const [showEnterWeightModal, setShowEnterWeightModal] = useState(false);
     const [showWithoutRoutineModal, setShowWithoutRoutineModal] =
@@ -148,6 +151,7 @@ const ContentHomeScreen = () => {
                 <NoContentMessage
                     title={t("HomeScreen:No_Routines")}
                     buttonLabel={t("RoutineScreen:Create_Routine")}
+                    onPress={() => navigation.navigate("CreateRoutine", {})}
                 />
             ) : (
                 renderExerciseList()
